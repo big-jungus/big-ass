@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         TryCharge();
-        CheckMinimumSpeed();
+        CheckSpeeds();
     }
 
     private void Charge(InputAction.CallbackContext context)
@@ -83,8 +83,9 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = mouseWorldPos - new Vector2(transform.position.x, transform.position.y);
         Vector2 force = dir * (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration) * PlayerManager.playerManager.playerStats.GetChargeMultiplier();
 
-        rb.AddForce(force, ForceMode2D.Force);
-        CheckMaxSpeed();
+        Vector2 trueForce = force.normalized * PlayerManager.playerManager.playerStats.GetMaxVelocity();
+
+        rb.AddForce(trueForce, ForceMode2D.Force);
 
         chargeStartLocation = transform.position;
 
@@ -110,16 +111,7 @@ public class PlayerController : MonoBehaviour
         arrow.SetActive(false);
     }
 
-    private void CheckMaxSpeed()
-    {
-        if (rb.velocity.magnitude > PlayerManager.playerManager.playerStats.GetMaxVelocity())
-        {
-            Vector2 newDir = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetMaxVelocity();
-            rb.velocity = newDir;
-        }
-    }
-
-    private void CheckMinimumSpeed()
+    private void CheckSpeeds()
     {
         if (!canCheckSpeed)
             return;

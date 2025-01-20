@@ -1550,7 +1550,7 @@ MonoBehaviour:
   damage: 5
   maxChargeDuration: 2
   chargeMultiplier: 200
-  maxVelocity: 100
+  maxForceMagnitude: 1000
   ChargeUpgrade: 0
   chargeUpgradeAmount: 0.5
   velocityUpgradeAmount: 0.5
@@ -1971,8 +1971,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90000e948f2e84439a6cf60f52cc659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxIntervalDuration: 0.15
-  slowAmount: 0.2
+  maxIntervalDuration: 0.01
+  slowAmount: 1.5
 --- !u!1 &1206094905
 GameObject:
   m_ObjectHideFlags: 0
