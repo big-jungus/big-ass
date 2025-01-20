@@ -83,7 +83,9 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = mouseWorldPos - new Vector2(transform.position.x, transform.position.y);
         Vector2 force = dir * (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration) * PlayerManager.playerManager.playerStats.GetChargeMultiplier();
 
-        Vector2 trueForce = force.normalized * PlayerManager.playerManager.playerStats.GetMaxVelocity();
+        Vector2 trueForce = force;
+        if (trueForce.magnitude > PlayerManager.playerManager.playerStats.GetMaxVelocity())
+            trueForce = force.normalized * PlayerManager.playerManager.playerStats.GetMaxVelocity();
 
         rb.AddForce(trueForce, ForceMode2D.Force);
 
