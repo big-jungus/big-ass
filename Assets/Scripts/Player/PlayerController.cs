@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         isCharging = true;
+        arrow.SetActive(true);
     }
 
     private void TryCharge()
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
         currentChargeDuration = 0;
         isCharging = false;
         PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
+        arrow.SetActive(false);
 
         // Lock Min Speed Check
         if (speedLockoutRoutine != null)
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         rb.velocity = Vector2.zero;
+        arrow.SetActive(false);
     }
 
     private void CheckMaxSpeed()
@@ -132,6 +135,11 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         transform.position = chargeStartLocation;
         PlayerManager.playerManager.playerCombat.TakeDamage(damageAmount);
+
+        currentChargeDuration = 0;
+        isCharging = false;
+        PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
+        arrow.SetActive(false);
     }
 
     private IEnumerator MinSpeedLockoutTimer()
