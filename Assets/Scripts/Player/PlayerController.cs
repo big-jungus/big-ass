@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("Other References")]
     [SerializeField] private InputActionReference charge;
     [SerializeField] private InputActionReference mouseLocation;
+    [SerializeField] private InputActionReference stop;
     [SerializeField] private GameObject arrow;
     public Rigidbody2D rb;
 
@@ -27,12 +28,14 @@ public class PlayerController : MonoBehaviour
     {
         charge.action.started += Charge;
         charge.action.canceled += Release;
+        stop.action.performed += Stop;
     }
 
     private void OnDisable()
     {
         charge.action.started -= Charge;
         charge.action.canceled -= Release;
+        stop.action.performed -= Stop;
     }
 
     private void Update()
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePosition);
 
         Vector2 dir = mouseWorldPos - new Vector2(transform.position.x, transform.position.y);
-        Vector2 force = dir * (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration) * PlayerManager.playerManager.playerStats.chargeMultiplier;
+        Vector2 force = dir * (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration) * PlayerManager.playerManager.playerStats.GetChargeMultiplier();
 
         rb.AddForce(force, ForceMode2D.Force);
         CheckMaxSpeed();
@@ -96,11 +99,19 @@ public class PlayerController : MonoBehaviour
         speedLockoutRoutine = StartCoroutine(MinSpeedLockoutTimer());
     }
 
+    private void Stop(InputAction.CallbackContext context)
+    {
+        if (!PlayerManager.playerManager.playerStats.StopUpgrade)
+            return;
+
+        rb.velocity = Vector2.zero;
+    }
+
     private void CheckMaxSpeed()
     {
-        if (rb.velocity.magnitude > PlayerManager.playerManager.playerStats.maxVelocity)
+        if (rb.velocity.magnitude > PlayerManager.playerManager.playerStats.GetMaxVelocity())
         {
-            Vector2 newDir = rb.velocity.normalized * PlayerManager.playerManager.playerStats.maxVelocity;
+            Vector2 newDir = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetMaxVelocity();
             rb.velocity = newDir;
         }
     }

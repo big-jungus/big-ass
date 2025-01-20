@@ -11,6 +11,22 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Movement Variables")]
     public float maxChargeDuration;
-    public float chargeMultiplier;
-    public float maxVelocity;
+    [SerializeField] private float chargeMultiplier;
+    [SerializeField] private float maxVelocity;
+
+    [Header("Upgrades")]
+    public bool ChargeUpgrade;
+    [SerializeField] private float chargeUpgradeAmount;
+    [SerializeField] private float velocityUpgradeAmount;
+    public bool StopUpgrade;
+
+    public float GetChargeMultiplier()
+    {
+        return ChargeUpgrade ? chargeMultiplier + (chargeMultiplier * chargeUpgradeAmount) : chargeMultiplier;
+    }
+
+    public float GetMaxVelocity()
+    {
+        return ChargeUpgrade ? maxVelocity + (maxVelocity * velocityUpgradeAmount) : maxVelocity;
+    }
 }
