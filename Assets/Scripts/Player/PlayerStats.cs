@@ -13,6 +13,8 @@ public class PlayerStats : MonoBehaviour
     public float maxChargeDuration;
     [SerializeField] private float chargeMultiplier;
     [SerializeField] private float maxForceMagnitude;
+    public int maxChargeTier;
+    [SerializeField] private List<int> speedTierValues = new List<int>();
 
     [Header("Upgrades")]
     public bool ChargeUpgrade;
@@ -20,9 +22,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float velocityUpgradeAmount;
     public bool StopUpgrade;
 
-    public float GetChargeMultiplier()
+    public float GetSpeedValue(int tier)
     {
-        return ChargeUpgrade ? chargeMultiplier + (chargeMultiplier * chargeUpgradeAmount) : chargeMultiplier;
+        return speedTierValues[tier];
     }
 
     public float GetMaxVelocity()

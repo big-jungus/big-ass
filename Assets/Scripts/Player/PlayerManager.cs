@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerCombat playerCombat;
     public PlayerController playerController;
     public PlayerUI playerUI;
+    public GameObject playerObj;
 
     public static PlayerManager playerManager;
 

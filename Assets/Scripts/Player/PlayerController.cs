@@ -9,18 +9,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference charge;
     [SerializeField] private InputActionReference mouseLocation;
     [SerializeField] private InputActionReference stop;
-    [SerializeField] private GameObject arrow;
     public Rigidbody2D rb;
 
     private float currentChargeDuration;
+    private bool canCharge;
     private bool isCharging;
 
+    private float currentSpeedTier;
+
     [Header("Other")]
-    [SerializeField] private float minChargeSpeed;
-    [SerializeField] private float stopSpeed;
-    [SerializeField] private float minSpeedLockoutDuration;
-    private bool canCheckSpeed;
-    private Coroutine speedLockoutRoutine;
+    [SerializeField] private float stopDrag;
+    [SerializeField] private float lastBounceCheckDuration;
+    [SerializeField] private float bounceTierReduction;
+    private Coroutine lastBounceRoutine;
 
     private Vector2 chargeStartLocation;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
         charge.action.started += Charge;
         charge.action.canceled += Release;
         stop.action.performed += Stop;
+        canCharge = true;
     }
 
     private void OnDisable()
@@ -41,16 +43,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         TryCharge();
-        CheckSpeeds();
     }
 
     private void Charge(InputAction.CallbackContext context)
     {
-        if (rb.velocity.magnitude > minChargeSpeed)
+        if (!canCharge)
             return;
 
         isCharging = true;
-        arrow.SetActive(true);
     }
 
     private void TryCharge()
@@ -65,43 +65,35 @@ public class PlayerController : MonoBehaviour
 
         currentChargeDuration = Mathf.Clamp(currentChargeDuration + Time.deltaTime, 0, PlayerManager.playerManager.playerStats.maxChargeDuration);
         PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
-
-        Vector2 mousePosition = mouseLocation.action.ReadValue<Vector2>();
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePosition);
-        //Debug.Log(mouseWorldPos);
-
-        Vector3 trueRot = Quaternion.LookRotation(mouseWorldPos - transform.position, Vector3.forward).eulerAngles;
-        trueRot.x = 0;
-        arrow.transform.eulerAngles = trueRot;
     }
 
     private void Release(InputAction.CallbackContext context)
     {
+        // Charge Meter
+        float ChargePercent = (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
+        currentSpeedTier = PlayerManager.playerManager.playerStats.maxChargeTier * ChargePercent - 1;
+
+        // Movement
         Vector2 mousePosition = mouseLocation.action.ReadValue<Vector2>();
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        Vector2 dir = mouseWorldPos - new Vector2(transform.position.x, transform.position.y);
-        Vector2 force = dir * (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration) * PlayerManager.playerManager.playerStats.GetChargeMultiplier();
+        Vector2 normalDir = (mouseWorldPos - new Vector2(transform.position.x, transform.position.y)).normalized;
+        Vector2 launchVelocity = normalDir * PlayerManager.playerManager.playerStats.GetSpeedValue(Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier));
 
-        Vector2 trueForce = force;
-        if (trueForce.magnitude > PlayerManager.playerManager.playerStats.GetMaxVelocity())
-            trueForce = force.normalized * PlayerManager.playerManager.playerStats.GetMaxVelocity();
-
-        rb.AddForce(trueForce, ForceMode2D.Force);
-
+        rb.velocity = launchVelocity;
         chargeStartLocation = transform.position;
+
 
         // Reset Charge
         currentChargeDuration = 0;
         isCharging = false;
-        PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
-        arrow.SetActive(false);
+        canCharge = false;
 
-        // Lock Min Speed Check
-        if (speedLockoutRoutine != null)
-            StopCoroutine(speedLockoutRoutine);
+        // Last Bounce Check
+        if (lastBounceRoutine != null)
+            StopCoroutine(lastBounceRoutine);
 
-        speedLockoutRoutine = StartCoroutine(MinSpeedLockoutTimer());
+        lastBounceRoutine = StartCoroutine(MinSpeedLockoutTimer());
     }
 
     private void Stop(InputAction.CallbackContext context)
@@ -110,18 +102,6 @@ public class PlayerController : MonoBehaviour
             return;
 
         rb.velocity = Vector2.zero;
-        arrow.SetActive(false);
-    }
-
-    private void CheckSpeeds()
-    {
-        if (!canCheckSpeed)
-            return;
-
-        if (rb.velocity.magnitude <= stopSpeed)
-        {
-            rb.velocity = Vector2.zero;
-        }
     }
 
     public void SpikeCollisison(int damageAmount)
@@ -132,21 +112,33 @@ public class PlayerController : MonoBehaviour
 
         currentChargeDuration = 0;
         isCharging = false;
-        PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
-        arrow.SetActive(false);
     }
 
     private IEnumerator MinSpeedLockoutTimer()
     {
         float currentTime = 0f;
-        canCheckSpeed = false;
 
-        while (currentTime < minSpeedLockoutDuration)
+        while (currentTime < lastBounceCheckDuration)
         {
             currentTime += Time.deltaTime;
             yield return null;
         }
 
-        canCheckSpeed = true;
+        rb.drag = stopDrag;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (currentSpeedTier > 0)
+        {
+            currentSpeedTier -= bounceTierReduction;
+
+            rb.velocity = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetSpeedValue(Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier));
+        }
+
+        if (lastBounceRoutine != null)
+            StopCoroutine(lastBounceRoutine);
+
+        lastBounceRoutine = StartCoroutine(MinSpeedLockoutTimer());
     }
 }
