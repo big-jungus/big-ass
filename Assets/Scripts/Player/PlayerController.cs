@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,11 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 chargeStartLocation;
 
+    public Action ChargeStarted;
+    public Action ChargeEnded;
+
+    public Action<Vector2> CollisionOccured;
+
     private void OnEnable()
     {
         charge.action.started += Charge;
@@ -51,6 +57,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         isCharging = true;
+        ChargeStarted?.Invoke();
     }
 
     private void TryCharge()
@@ -69,6 +76,9 @@ public class PlayerController : MonoBehaviour
 
     private void Release(InputAction.CallbackContext context)
     {
+        if (!canCharge)
+            return;
+
         // Charge Meter
         float ChargePercent = (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
         currentSpeedTier = PlayerManager.playerManager.playerStats.maxChargeTier * ChargePercent - 1;
@@ -88,6 +98,7 @@ public class PlayerController : MonoBehaviour
         currentChargeDuration = 0;
         isCharging = false;
         canCharge = false;
+        ChargeEnded?.Invoke();
 
         // Last Bounce Check
         if (lastBounceRoutine != null)
@@ -125,10 +136,17 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.drag = stopDrag;
+
+        yield return new WaitForSeconds(1);
+        rb.velocity = Vector2.zero;
+        rb.drag = 0;
+        canCharge = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        CollisionOccured?.Invoke(rb.velocity);
+
         if (currentSpeedTier > 0)
         {
             currentSpeedTier -= bounceTierReduction;
