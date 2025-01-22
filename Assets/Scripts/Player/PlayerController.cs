@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        currentSpeedTier = 0;
         rb.velocity = Vector2.zero;
         rb.drag = 0;
         canCharge = true;
@@ -171,5 +172,10 @@ public class PlayerController : MonoBehaviour
     public float GetCurrentCharge()
     {
         return currentChargeDuration;
+    }
+
+    public int GetCurrentTier()
+    {
+        return Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier);
     }
 }

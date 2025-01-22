@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerVisuals : MonoBehaviour
 {
     [Header("Squash N Stretch Variables")]
+
+    [SerializeField] private List<float> scaleTiers = new List<float>();
     [SerializeField] private float minVelocity;
-    [SerializeField] private AnimationCurve scaleCurve;
     [SerializeField] private float squashTime;
     private Coroutine squashRoutine;
 
@@ -46,7 +47,7 @@ public class PlayerVisuals : MonoBehaviour
 
     private IEnumerator UpdateScale(float velocity)
     {
-        float newScale = scaleCurve.Evaluate(velocity);
+        float newScale = scaleTiers[PlayerManager.playerManager.playerController.GetCurrentTier()];
         float oldScale = transform.localScale.y;
 
         float currentTime = 0f;
