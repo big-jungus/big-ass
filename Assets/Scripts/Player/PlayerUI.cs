@@ -15,8 +15,15 @@ public class PlayerUI : MonoBehaviour
 
     private void Start()
     {
-        UpdateHealth();
+        PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
+
+        UpdateHealth(0);
         UpdateCharge(0);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerManager.playerManager.playerCombat.DamageTaken -= UpdateHealth;
     }
 
     private void Update()
@@ -25,7 +32,7 @@ public class PlayerUI : MonoBehaviour
         chargeDebug.text = "Charge: " + (chargeBar.value / chargeBar.maxValue).ToString() + "%";
     }
 
-    public void UpdateHealth()
+    public void UpdateHealth(int amount)
     {
         healthBar.value = PlayerManager.playerManager.playerStats.currentHealth / PlayerManager.playerManager.playerStats.maxHealth;
     }
