@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public Action ChargeStarted;
     public Action<float> Charging;
     public Action ChargeEnded;
+    public Action<float> VelocityUpdated;
 
     public Action<Vector2> CollisionOccured;
 
@@ -93,6 +94,8 @@ public class PlayerController : MonoBehaviour
         Vector2 launchVelocity = normalDir * PlayerManager.playerManager.playerStats.GetSpeedValue(Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier));
 
         rb.velocity = launchVelocity;
+        VelocityUpdated?.Invoke(rb.velocity.magnitude);
+
         chargeStartLocation = transform.position;
 
 
@@ -140,9 +143,11 @@ public class PlayerController : MonoBehaviour
         rb.drag = stopDrag;
 
         yield return new WaitForSeconds(1);
+
         rb.velocity = Vector2.zero;
         rb.drag = 0;
         canCharge = true;
+        VelocityUpdated?.Invoke(rb.velocity.magnitude);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -154,6 +159,7 @@ public class PlayerController : MonoBehaviour
             currentSpeedTier -= bounceTierReduction;
 
             rb.velocity = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetSpeedValue(Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier));
+            VelocityUpdated?.Invoke(rb.velocity.magnitude);
         }
 
         if (lastBounceRoutine != null)

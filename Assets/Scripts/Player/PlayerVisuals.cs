@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
+    [Header("Jitter Animation")]
     [SerializeField] private Vector2 maxMovementConstraints;
     [SerializeField] private AnimationCurve movementSpeedCurve;
 
@@ -16,11 +17,19 @@ public class PlayerVisuals : MonoBehaviour
     [SerializeField] private float returnDuration;
     [SerializeField] private AnimationCurve returnCurve;
 
+    [Header("Squash N Stretch Variables")]
+    [SerializeField] private float minVelocity;
+    [SerializeField] private AnimationCurve scaleCurve;
+    [SerializeField] private float squashTime;
+    private Coroutine squashRoutine;
+
+
     private void Start()
     {
         PlayerManager.playerManager.playerController.Charging += Shake;
         PlayerManager.playerManager.playerController.ChargeStarted += Started;
         PlayerManager.playerManager.playerController.ChargeEnded += Ended;
+        PlayerManager.playerManager.playerController.VelocityUpdated += SquashNStretch;
     }
 
     private void OnDestroy()
@@ -28,18 +37,21 @@ public class PlayerVisuals : MonoBehaviour
         PlayerManager.playerManager.playerController.Charging -= Shake;
         PlayerManager.playerManager.playerController.ChargeStarted -= Started;
         PlayerManager.playerManager.playerController.ChargeEnded -= Ended;
+        PlayerManager.playerManager.playerController.VelocityUpdated -= SquashNStretch;
     }
 
     private void Update()
     {
-        SquashStretch();
+        RotateToDirection();
     }
 
-    private void SquashStretch()
+    private void RotateToDirection()
     {
-        if (PlayerManager.playerManager.playerController.rb.velocity.magnitude > 0)
+        if (PlayerManager.playerManager.playerController.rb.velocity.magnitude >= minVelocity)
         {
-
+            Vector2 dir = PlayerManager.playerManager.playerController.rb.velocity;
+            float rotZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.localEulerAngles = new Vector3(0, 0, rotZ);
         }
     }
 
@@ -97,6 +109,29 @@ public class PlayerVisuals : MonoBehaviour
             currentTime += Time.deltaTime;
 
             transform.localPosition = Vector3.Lerp(startingPosition, Vector3.zero, returnCurve.Evaluate(currentTime / returnDuration));
+        }
+    }
+
+    private void SquashNStretch(float velocity)
+    {
+        if (squashRoutine != null)
+            StopCoroutine(squashRoutine);
+
+        squashRoutine = StartCoroutine(UpdateScale(velocity));
+    }
+
+    private IEnumerator UpdateScale(float velocity)
+    {
+        float newScale = scaleCurve.Evaluate(velocity);
+        float oldScale = transform.localScale.y;
+
+        float currentTime = 0f;
+        while (currentTime < squashTime)
+        {
+            yield return null;
+            currentTime += Time.deltaTime;
+
+            transform.localScale = new Vector3(1, Mathf.Lerp(oldScale, newScale, currentTime / squashTime), 1);
         }
     }
 }
