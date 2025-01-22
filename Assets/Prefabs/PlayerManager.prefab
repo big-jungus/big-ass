@@ -62,14 +62,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46951202ce123d641adca270d17b15d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 10
-  maxHealth: 10
+  currentHealth: 4
+  maxHealth: 4
   damage: 5
   maxChargeDuration: 2
   chargeMultiplier: 200
   maxForceMagnitude: 1000
   maxChargeTier: 4
-  speedTierValues: 0100000003000000050000000a000000
+  speedTierValues: 01000000050000000a00000014000000
   ChargeUpgrade: 0
   chargeUpgradeAmount: 0.5
   velocityUpgradeAmount: 0.5

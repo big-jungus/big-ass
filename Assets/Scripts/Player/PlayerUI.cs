@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    [Header("Health Hearts")]
+    [SerializeField] private Transform healthHolder;
+    [SerializeField] private GameObject healthHeartPrefab;
+    [SerializeField] private float spaceAmount;
+    private List<HealthHeart> healthHearts = new List<HealthHeart>();
+
     [Header("UI References")]
-    [SerializeField] private Slider healthBar;
     [SerializeField] private Slider chargeBar;
 
     [SerializeField] private TMP_Text velocityDebug;
@@ -17,7 +22,7 @@ public class PlayerUI : MonoBehaviour
     {
         PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
 
-        UpdateHealth(0);
+        SetupHealth();
         UpdateCharge(0);
     }
 
@@ -32,9 +37,42 @@ public class PlayerUI : MonoBehaviour
         chargeDebug.text = "Charge: " + (chargeBar.value / chargeBar.maxValue).ToString() + "%";
     }
 
+    private void SetupHealth()
+    {
+        for (int i = 0; i < PlayerManager.playerManager.playerStats.maxHealth; i++)
+        {
+            AddHealthHeart();
+        }
+
+        UpdateHealth(0);
+    }
+
+    public void AddHealthHeart()
+    {
+        GameObject health = Instantiate(healthHeartPrefab, healthHolder, false);
+        health.transform.localPosition = new Vector3(healthHolder.childCount * spaceAmount, 0, 0);
+        healthHearts.Add(health.GetComponent<HealthHeart>());
+    }
+
+    public void RemoveHealthHeart()
+    {
+        healthHearts[healthHearts.Count - 1].RemoveHeart();
+    }
+
+    private void ResetHealthPositions()
+    {
+        for (int i = 0; i < healthHearts.Count; i++)
+        {
+            healthHearts[i].transform.localPosition = new Vector3(i * spaceAmount, 0, 0);
+        }
+    }
+
     public void UpdateHealth(int amount)
     {
-        healthBar.value = PlayerManager.playerManager.playerStats.currentHealth / PlayerManager.playerManager.playerStats.maxHealth;
+        for (int i = 0; i < amount; i++)
+        {
+            RemoveHealthHeart();
+        }
     }
 
     public void UpdateCharge(float currentCharge)
