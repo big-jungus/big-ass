@@ -55,7 +55,7 @@ public class PlayerVisuals : MonoBehaviour
             yield return null;
             currentTime += Time.deltaTime;
 
-            transform.localScale = new Vector3(1, Mathf.Lerp(oldScale, newScale, currentTime / squashTime), 1);
+            transform.localScale = new Vector3(Mathf.Lerp(oldScale, newScale, currentTime / squashTime), 1, 1);
         }
     }
 }
