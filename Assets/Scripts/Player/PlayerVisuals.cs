@@ -30,6 +30,19 @@ public class PlayerVisuals : MonoBehaviour
         PlayerManager.playerManager.playerController.ChargeEnded -= Ended;
     }
 
+    private void Update()
+    {
+        SquashStretch();
+    }
+
+    private void SquashStretch()
+    {
+        if (PlayerManager.playerManager.playerController.rb.velocity.magnitude > 0)
+        {
+
+        }
+    }
+
     private void Started()
     {
         shake = true;
