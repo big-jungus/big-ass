@@ -4,19 +4,6 @@ using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
-    [Header("Jitter Animation")]
-    [SerializeField] private Vector2 maxMovementConstraints;
-    [SerializeField] private AnimationCurve movementSpeedCurve;
-
-    private Vector2 currentMovementConstraints;
-    private float currentMovementSpeed;
-
-    private bool shake;
-
-    [Header("Return Animation")]
-    [SerializeField] private float returnDuration;
-    [SerializeField] private AnimationCurve returnCurve;
-
     [Header("Squash N Stretch Variables")]
     [SerializeField] private float minVelocity;
     [SerializeField] private AnimationCurve scaleCurve;
@@ -26,17 +13,11 @@ public class PlayerVisuals : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.playerManager.playerController.Charging += Shake;
-        PlayerManager.playerManager.playerController.ChargeStarted += Started;
-        PlayerManager.playerManager.playerController.ChargeEnded += Ended;
         PlayerManager.playerManager.playerController.VelocityUpdated += SquashNStretch;
     }
 
     private void OnDestroy()
     {
-        PlayerManager.playerManager.playerController.Charging -= Shake;
-        PlayerManager.playerManager.playerController.ChargeStarted -= Started;
-        PlayerManager.playerManager.playerController.ChargeEnded -= Ended;
         PlayerManager.playerManager.playerController.VelocityUpdated -= SquashNStretch;
     }
 
@@ -52,63 +33,6 @@ public class PlayerVisuals : MonoBehaviour
             Vector2 dir = PlayerManager.playerManager.playerController.rb.velocity;
             float rotZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.localEulerAngles = new Vector3(0, 0, rotZ);
-        }
-    }
-
-    private void Started()
-    {
-        shake = true;
-        StartCoroutine(ShakeAnimation());
-    }
-
-    private void Shake(float currentChargeAmount)
-    {
-        float percent = currentChargeAmount / PlayerManager.playerManager.playerStats.maxChargeDuration;
-        currentMovementSpeed = movementSpeedCurve.Evaluate(percent);
-        currentMovementConstraints = Vector2.Lerp(Vector2.zero, maxMovementConstraints, percent);
-    }
-
-    private void Ended()
-    {
-        shake = false;
-
-        StartCoroutine(ReturnAnimation());
-    }
-
-    private IEnumerator ShakeAnimation()
-    {
-        while (shake)
-        {
-            yield return MovePosition();
-        }
-    }
-
-    private IEnumerator MovePosition()
-    {
-        Vector2 randLocation = new Vector2(Random.Range(-currentMovementConstraints.x, currentMovementConstraints.x), Random.Range(-currentMovementConstraints.y, currentMovementConstraints.y));
-        Vector2 currLocation = transform.localPosition;
-
-        float currentTime = 0f;
-        while (currentTime < 1f)
-        {
-            currentTime += Time.deltaTime * currentMovementSpeed;
-            yield return null;
-
-            transform.localPosition = Vector2.Lerp(currLocation, randLocation, currentTime);
-        }
-    }
-
-    private IEnumerator ReturnAnimation()
-    {
-        Vector3 startingPosition = transform.localPosition;
-
-        float currentTime = 0f;
-        while (currentTime < returnDuration)
-        {
-            yield return null;
-            currentTime += Time.deltaTime;
-
-            transform.localPosition = Vector3.Lerp(startingPosition, Vector3.zero, returnCurve.Evaluate(currentTime / returnDuration));
         }
     }
 
@@ -131,7 +55,7 @@ public class PlayerVisuals : MonoBehaviour
             yield return null;
             currentTime += Time.deltaTime;
 
-            transform.localScale = new Vector3(1, Mathf.Lerp(oldScale, newScale, currentTime / squashTime), 1);
+            transform.localScale = new Vector3(Mathf.Lerp(oldScale, newScale, currentTime / squashTime), 1, 1);
         }
     }
 }
