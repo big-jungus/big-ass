@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference mouseLocation;
     [SerializeField] private InputActionReference stop;
     public Rigidbody2D rb;
+    private DirectionArrow arrow;
 
     private float currentChargeDuration;
     private bool canCharge;
@@ -32,6 +33,10 @@ public class PlayerController : MonoBehaviour
     public Action<float> VelocityUpdated;
 
     public Action<Vector2> CollisionOccured;
+
+    void Start(){
+        arrow = GetComponentInChildren<DirectionArrow>();
+    }
 
     private void OnEnable()
     {
@@ -110,6 +115,8 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(lastBounceRoutine);
 
         lastBounceRoutine = StartCoroutine(MinSpeedLockoutTimer());
+
+        arrow.Hide();
     }
 
     private void Stop(InputAction.CallbackContext context)
@@ -148,6 +155,9 @@ public class PlayerController : MonoBehaviour
         rb.drag = 0;
         canCharge = true;
         VelocityUpdated?.Invoke(rb.velocity.magnitude);
+
+        
+        arrow.Show();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

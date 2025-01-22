@@ -69,7 +69,7 @@ MonoBehaviour:
   chargeMultiplier: 200
   maxForceMagnitude: 1000
   maxChargeTier: 4
-  speedTierValues: 0100000003000000050000000a000000
+  speedTierValues: 0a00000014000000190000001e000000
   ChargeUpgrade: 0
   chargeUpgradeAmount: 0.5
   velocityUpgradeAmount: 0.5
