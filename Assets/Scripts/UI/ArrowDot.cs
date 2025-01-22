@@ -12,14 +12,14 @@ public class ArrowDot : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.playerManager.playerController.Charging += CheckForMaxCharge;
-        PlayerManager.playerManager.playerController.ChargeEnded += Released;
+        // PlayerManager.playerManager.playerController.Charging += CheckForMaxCharge;
+        // PlayerManager.playerManager.playerController.ChargeEnded += Released;
     }
 
     private void OnDestroy()
     {
-        PlayerManager.playerManager.playerController.Charging -= CheckForMaxCharge;
-        PlayerManager.playerManager.playerController.ChargeEnded -= Released;
+        // PlayerManager.playerManager.playerController.Charging -= CheckForMaxCharge;
+        // PlayerManager.playerManager.playerController.ChargeEnded -= Released;
     }
 
     private void CheckForMaxCharge(float currentCharge)

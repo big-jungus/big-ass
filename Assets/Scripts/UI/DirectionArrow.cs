@@ -8,6 +8,9 @@ public class DirectionArrow : MonoBehaviour
     [SerializeField] private InputActionReference mouseLocation;
     [SerializeField] private float baseOffset;
     [SerializeField] private float minArrowOffset;
+    [Header("Flash Anim")]
+    [SerializeField] private float flashDelay = .1f;
+    [SerializeField] private Color[] flashColors;
 
     [Header("Arrow Expansion")]
     [SerializeField] private List<ArrowDot> dots = new List<ArrowDot>();
@@ -18,16 +21,27 @@ public class DirectionArrow : MonoBehaviour
     [SerializeField] private float compactionDuration;
     [SerializeField] private AnimationCurve compactionCurve;
 
+    private SpriteRenderer[] srs;
+    private Coroutine flashRoutine;
+
     private void Start()
     {
         PlayerManager.playerManager.playerController.Charging += Charge;
         PlayerManager.playerManager.playerController.ChargeEnded += EndCharge;
+
+        PlayerManager.playerManager.playerController.Charging += CheckForMaxCharge;
+        PlayerManager.playerManager.playerController.ChargeEnded += Released;
+        srs = GetComponentsInChildren<SpriteRenderer>();
+        // Hide();
     }
 
     private void OnDestroy()
     {
         PlayerManager.playerManager.playerController.Charging -= Charge;
         PlayerManager.playerManager.playerController.ChargeEnded -= EndCharge;
+
+        PlayerManager.playerManager.playerController.Charging -= CheckForMaxCharge;
+        PlayerManager.playerManager.playerController.ChargeEnded -= Released;
     }
 
     void Update()
@@ -80,6 +94,65 @@ public class DirectionArrow : MonoBehaviour
                 arrow.transform.localPosition = new Vector3(compactionSpace * dots.Count + baseOffset, 0, 0);
             else
                 arrow.transform.localPosition = new Vector3(compactionSpace * (dots.Count - 1) + minArrowOffset + baseOffset, 0, 0);
+        }
+    }
+
+    public void Show(){
+        foreach(SpriteRenderer sr in srs){
+            sr.enabled = true;
+        }
+    }
+    public void Hide(){
+        foreach(SpriteRenderer sr in srs){
+            sr.enabled = false;
+        }
+    }
+
+
+
+    private void CheckForMaxCharge(float currentCharge)
+    {
+        if (currentCharge == PlayerManager.playerManager.playerStats.maxChargeDuration)
+        {
+            if (flashRoutine == null)
+                flashRoutine = StartCoroutine(FlashAnimation());
+        }
+    }
+
+    private void Released()
+    {
+        if (flashRoutine != null)
+            StopCoroutine(flashRoutine);
+            flashRoutine = null;
+
+            foreach(SpriteRenderer sr in srs){
+                sr.color = flashColors[0];
+            }
+    }
+
+    private IEnumerator FlashAnimation()
+    {
+        float currentTime = 0f;
+        int spriteCounter = 0;
+
+        // yield return new WaitForSeconds(offset);
+
+        while (true)
+        {
+            currentTime = 0f;
+            while (currentTime < flashDelay)
+            {
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+
+            spriteCounter++;
+            if (spriteCounter >= flashColors.Length)
+                spriteCounter = 0;
+            
+            foreach(SpriteRenderer sr in srs){
+                sr.color = flashColors[spriteCounter];
+            }
         }
     }
 }
