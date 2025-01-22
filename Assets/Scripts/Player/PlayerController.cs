@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 chargeStartLocation;
 
     public Action ChargeStarted;
+    public Action<float> Charging;
     public Action ChargeEnded;
 
     public Action<Vector2> CollisionOccured;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
         currentChargeDuration = Mathf.Clamp(currentChargeDuration + Time.deltaTime, 0, PlayerManager.playerManager.playerStats.maxChargeDuration);
         PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
+        Charging?.Invoke(currentChargeDuration);
     }
 
     private void Release(InputAction.CallbackContext context)
@@ -95,10 +97,10 @@ public class PlayerController : MonoBehaviour
 
 
         // Reset Charge
+        ChargeEnded?.Invoke();
         currentChargeDuration = 0;
         isCharging = false;
         canCharge = false;
-        ChargeEnded?.Invoke();
 
         // Last Bounce Check
         if (lastBounceRoutine != null)
@@ -158,5 +160,10 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(lastBounceRoutine);
 
         lastBounceRoutine = StartCoroutine(MinSpeedLockoutTimer());
+    }
+
+    public float GetCurrentCharge()
+    {
+        return currentChargeDuration;
     }
 }
