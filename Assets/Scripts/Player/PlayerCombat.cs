@@ -6,11 +6,18 @@ using UnityEngine;
 public class PlayerCombat : CombatBase
 {
     public Action<int> DamageTaken;
+    public Action PlayerDeath;
 
     public override void TakeDamage(int amount)
     {
         PlayerManager.playerManager.playerStats.currentHealth -= amount;
         DamageTaken?.Invoke(amount);
+
+        if (PlayerManager.playerManager.playerStats.currentHealth <= 0)
+        {
+            PlayerDeath?.Invoke();
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

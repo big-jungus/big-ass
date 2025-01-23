@@ -24,6 +24,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private List<float> scaleTiers = new List<float>();
     private Coroutine scaleChangeRoutine;
 
+    public bool isPaused;
+
     private void Start()
     {
         PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;

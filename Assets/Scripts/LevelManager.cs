@@ -6,11 +6,18 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private List<string> levels = new List<string>();
+    private int activeLevel;
 
     // Save progress?
 
     public void LoadLevel(int level)
     {
         SceneManager.LoadScene(levels[level]);
+        activeLevel = level;
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(levels[activeLevel]);
     }
 }

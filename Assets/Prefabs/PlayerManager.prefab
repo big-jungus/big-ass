@@ -51,6 +51,9 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerUI: {fileID: 0}
   playerObj: {fileID: 0}
+  levelManager: {fileID: 7142230465445444075}
+  playerPrefab: {fileID: 1714026339044203799, guid: 5a4f83bc04f87fc4792f572357a3e8c5, type: 3}
+  uiPrefab: {fileID: 8252242280699906541, guid: 287edf2173e77b24d87a46f5bcda1071, type: 3}
 --- !u!114 &7691173740739947920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7ff98f4681ae54fbb8a4844ead2620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels:
+  - MainMenu
+  - TestLoader

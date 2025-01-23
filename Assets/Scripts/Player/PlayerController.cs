@@ -61,6 +61,9 @@ public class PlayerController : MonoBehaviour
 
     private void Charge(InputAction.CallbackContext context)
     {
+        if (PlayerManager.playerManager.playerUI.isPaused)
+            return;
+
         if (!canCharge)
             return;
 
@@ -70,6 +73,9 @@ public class PlayerController : MonoBehaviour
 
     private void TryCharge()
     {
+        if (PlayerManager.playerManager.playerUI.isPaused)
+            return;
+
         if (!isCharging)
         {
             if (charge.action.IsPressed())
@@ -93,6 +99,9 @@ public class PlayerController : MonoBehaviour
 
     private void Release(InputAction.CallbackContext context)
     {
+        if (PlayerManager.playerManager.playerUI.isPaused)
+            return;
+
         if (!canCharge)
             return;
 
