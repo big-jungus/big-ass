@@ -65,6 +65,7 @@ MonoBehaviour:
   currentHealth: 4
   maxHealth: 4
   damage: 5
+  minVelocityToAttack: 1
   maxChargeDuration: 2
   chargeMultiplier: 200
   maxForceMagnitude: 1000

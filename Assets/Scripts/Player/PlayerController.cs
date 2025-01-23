@@ -188,4 +188,9 @@ public class PlayerController : MonoBehaviour
     {
         return Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier);
     }
+
+    public void AttackReceived(Vector2 attackDir)
+    {
+        rb.AddForce(attackDir, ForceMode2D.Impulse);
+    }
 }

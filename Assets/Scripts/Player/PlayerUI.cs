@@ -57,6 +57,7 @@ public class PlayerUI : MonoBehaviour
     public void RemoveHealthHeart()
     {
         healthHearts[healthHearts.Count - 1].RemoveHeart();
+        healthHearts.RemoveAt(healthHearts.Count - 1);
     }
 
     private void ResetHealthPositions()
