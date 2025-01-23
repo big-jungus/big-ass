@@ -47,7 +47,7 @@ public class PlayerVisuals : MonoBehaviour
 
     private IEnumerator UpdateScale(float velocity)
     {
-        float newScale = scaleTiers[PlayerManager.playerManager.playerController.GetCurrentTier()];
+        float newScale = scaleTiers[PlayerManager.playerManager.playerController.GetCurrentSpeedTier()];
         float oldScale = transform.localScale.y;
 
         float currentTime = 0f;

@@ -18,9 +18,16 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private TMP_Text velocityDebug;
     [SerializeField] private TMP_Text chargeDebug;
 
+    [Header("Charge Bar Animation")]
+    [SerializeField] private AnimationCurve scaleChangeCurve;
+    [SerializeField] private float scaleDuration;
+    [SerializeField] private List<float> scaleTiers = new List<float>();
+    private Coroutine scaleChangeRoutine;
+
     private void Start()
     {
         PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
+        PlayerManager.playerManager.playerController.SpeedTierChanged += SpeedTierChanged;
 
         SetupHealth();
         UpdateCharge(0);
@@ -29,6 +36,7 @@ public class PlayerUI : MonoBehaviour
     private void OnDestroy()
     {
         PlayerManager.playerManager.playerCombat.DamageTaken -= UpdateHealth;
+        PlayerManager.playerManager.playerController.SpeedTierChanged -= SpeedTierChanged;
     }
 
     private void Update()
@@ -79,5 +87,28 @@ public class PlayerUI : MonoBehaviour
     public void UpdateCharge(float currentCharge)
     {
         chargeBar.value = currentCharge / PlayerManager.playerManager.playerStats.maxChargeDuration;
+    }
+
+    public void SpeedTierChanged(int tier)
+    {
+        if (scaleChangeRoutine != null)
+            StopCoroutine(scaleChangeRoutine);
+
+        scaleChangeRoutine = StartCoroutine((ScaleChangeAnimation(tier)));
+    }
+
+    private IEnumerator ScaleChangeAnimation(int tier)
+    {
+        Vector3 newScale = new Vector3(scaleTiers[tier + 1], scaleTiers[tier + 1], scaleTiers[tier + 1]);
+        Vector3 startingScale = chargeBar.transform.localScale;
+
+        float currentTime = 0f;
+        while (currentTime < scaleDuration)
+        {
+            yield return null;
+            currentTime += Time.deltaTime;
+
+            chargeBar.transform.localScale = Vector3.Lerp(startingScale, newScale, scaleChangeCurve.Evaluate(currentTime / scaleDuration));
+        }
     }
 }

@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public Action<float> Charging;
     public Action ChargeEnded;
     public Action<float> VelocityUpdated;
+    public Action<int> SpeedTierChanged;
 
     public Action<Vector2> CollisionOccured;
 
@@ -80,6 +81,14 @@ public class PlayerController : MonoBehaviour
         currentChargeDuration = Mathf.Clamp(currentChargeDuration + Time.deltaTime, 0, PlayerManager.playerManager.playerStats.maxChargeDuration);
         PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
         Charging?.Invoke(currentChargeDuration);
+
+        float ChargePercent = (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
+        int potentialTier = Mathf.Clamp(Mathf.FloorToInt(PlayerManager.playerManager.playerStats.maxChargeTier * ChargePercent - 1), 0, PlayerManager.playerManager.playerStats.maxChargeTier);
+        if (potentialTier > currentSpeedTier)
+        {
+            currentSpeedTier = potentialTier;
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+        }
     }
 
     private void Release(InputAction.CallbackContext context)
@@ -90,13 +99,14 @@ public class PlayerController : MonoBehaviour
         // Charge Meter
         float ChargePercent = (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
         currentSpeedTier = PlayerManager.playerManager.playerStats.maxChargeTier * ChargePercent - 1;
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
 
         // Movement
         Vector2 mousePosition = mouseLocation.action.ReadValue<Vector2>();
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePosition);
 
         Vector2 normalDir = (mouseWorldPos - new Vector2(transform.position.x, transform.position.y)).normalized;
-        Vector2 launchVelocity = normalDir * PlayerManager.playerManager.playerStats.GetSpeedValue(Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier));
+        Vector2 launchVelocity = normalDir * PlayerManager.playerManager.playerStats.GetSpeedValue(GetCurrentSpeedTier());
 
         rb.velocity = launchVelocity;
         VelocityUpdated?.Invoke(rb.velocity.magnitude);
@@ -156,8 +166,9 @@ public class PlayerController : MonoBehaviour
         rb.drag = 0;
         canCharge = true;
         VelocityUpdated?.Invoke(rb.velocity.magnitude);
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
 
-        
+
         arrow.Show();
     }
 
@@ -169,8 +180,9 @@ public class PlayerController : MonoBehaviour
         {
             currentSpeedTier -= bounceTierReduction;
 
-            rb.velocity = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetSpeedValue(Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier));
+            rb.velocity = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetSpeedValue(GetCurrentSpeedTier());
             VelocityUpdated?.Invoke(rb.velocity.magnitude);
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
         }
 
         if (lastBounceRoutine != null)
@@ -184,7 +196,7 @@ public class PlayerController : MonoBehaviour
         return currentChargeDuration;
     }
 
-    public int GetCurrentTier()
+    public int GetCurrentSpeedTier()
     {
         return Mathf.Clamp(Mathf.FloorToInt(currentSpeedTier), 0, PlayerManager.playerManager.playerStats.maxChargeTier);
     }
