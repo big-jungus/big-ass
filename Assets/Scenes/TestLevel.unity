@@ -644,6 +644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7142230465445444075, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: levels.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7854325423066794344, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
       propertyPath: playerUI
       value: 
