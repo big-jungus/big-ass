@@ -19,5 +19,6 @@ public class Collectable : MonoBehaviour
     {
         BigCoin,
         SmallCoin,
+        Win,
     }
 }

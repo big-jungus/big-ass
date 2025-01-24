@@ -58,6 +58,13 @@ public class PlayerManager : MonoBehaviour
 
     public void CollectableCollected(Collectable c)
     {
+        if (c.collectableType == Collectable.CollectableTypes.Win)
+        {
+            // Win
+            levelManager.LoadLevel(0);
+            return;
+        }
+
         playerStats.CollectableAdded(c);
         playerUI.CollectableAdded(c);
     }
