@@ -70,6 +70,7 @@ MonoBehaviour:
   maxHealth: 4
   damage: 5
   minVelocityToAttack: 1
+  invulnerabilityDuration: 0.25
   maxChargeDuration: 2
   chargeMultiplier: 200
   maxForceMagnitude: 1000

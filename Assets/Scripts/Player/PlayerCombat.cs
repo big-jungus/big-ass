@@ -8,15 +8,22 @@ public class PlayerCombat : CombatBase
     public Action<int> DamageTaken;
     public Action PlayerDeath;
 
+    private bool isDead = false;
+    private bool canTakeDamage = true;
+
     public override void TakeDamage(int amount)
     {
+        if (isDead || !canTakeDamage)
+            return;
+
         PlayerManager.playerManager.playerStats.currentHealth -= amount;
+        StartCoroutine(InvulnerabilityCooldown());
         DamageTaken?.Invoke(amount);
 
         if (PlayerManager.playerManager.playerStats.currentHealth <= 0)
         {
             PlayerDeath?.Invoke();
-            Destroy(this.gameObject);
+            isDead = true;
         }
     }
 
@@ -28,7 +35,14 @@ public class PlayerCombat : CombatBase
             bool dirCheck = Vector2.Dot(collision.transform.position - transform.parent.position, PlayerManager.playerManager.playerController.rb.velocity) > 0;
 
             if (speedCheck && dirCheck)
-                collision.gameObject.GetComponent<EnemyCombat>().TakeDamage(0);
+                collision.gameObject.GetComponent<CombatBase>().TakeDamage(0);
         }
+    }
+
+    private IEnumerator InvulnerabilityCooldown()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(PlayerManager.playerManager.playerStats.invulnerabilityDuration);
+        canTakeDamage = true;
     }
 }

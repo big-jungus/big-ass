@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     public float maxHealth;
     public float damage;
     public float minVelocityToAttack;
+    public float invulnerabilityDuration;
 
     [Header("Movement Variables")]
     public float maxChargeDuration;

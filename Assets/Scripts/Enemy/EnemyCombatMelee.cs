@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCombat : CombatBase
+public class EnemyCombatMelee : CombatBase
 {
     [SerializeField] private int damage;
     [SerializeField] private float launchForce;
