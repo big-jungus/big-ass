@@ -152,8 +152,17 @@ public class PlayerController : MonoBehaviour
         transform.position = chargeStartLocation;
         PlayerManager.playerManager.playerCombat.TakeDamage(damageAmount);
 
-        currentChargeDuration = 0;
-        isCharging = false;
+        currentSpeedTier = 0;
+        rb.velocity = Vector2.zero;
+        rb.drag = 0;
+        canCharge = true;
+        VelocityUpdated?.Invoke(rb.velocity.magnitude);
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+
+        if (lastBounceRoutine != null)
+            StopCoroutine(lastBounceRoutine);
+
+        arrow.Show();
     }
 
     private IEnumerator MinSpeedLockoutTimer()
