@@ -24,6 +24,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float velocityUpgradeAmount;
     public bool StopUpgrade;
 
+    [Header("Resources")]
+    public int bigCoinCount;
+    public int smallCoinCount;
+
     public float GetSpeedValue(int tier)
     {
         return speedTierValues[tier];
@@ -32,5 +36,18 @@ public class PlayerStats : MonoBehaviour
     public float GetMaxVelocity()
     {
         return ChargeUpgrade ? maxForceMagnitude + (maxForceMagnitude * velocityUpgradeAmount) : maxForceMagnitude;
+    }
+
+    public void CollectableAdded(Collectable c)
+    {
+        switch (c.collectableType)
+        {
+            case Collectable.CollectableTypes.SmallCoin:
+                smallCoinCount++;
+                break;
+            case Collectable.CollectableTypes.BigCoin:
+                bigCoinCount++;
+                break;
+        }
     }
 }

@@ -22,21 +22,6 @@ public class PlayerVisuals : MonoBehaviour
         PlayerManager.playerManager.playerController.VelocityUpdated -= SquashNStretch;
     }
 
-    private void Update()
-    {
-        RotateToDirection();
-    }
-
-    private void RotateToDirection()
-    {
-        if (PlayerManager.playerManager.playerController.rb.velocity.magnitude >= minVelocity)
-        {
-            Vector2 dir = PlayerManager.playerManager.playerController.rb.velocity;
-            float rotZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.localEulerAngles = new Vector3(0, 0, rotZ);
-        }
-    }
-
     private void SquashNStretch(float velocity)
     {
         if (squashRoutine != null)

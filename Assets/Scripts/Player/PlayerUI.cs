@@ -15,9 +15,6 @@ public class PlayerUI : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Slider chargeBar;
 
-    [SerializeField] private TMP_Text velocityDebug;
-    [SerializeField] private TMP_Text chargeDebug;
-
     [Header("Charge Bar Animation")]
     [SerializeField] private AnimationCurve scaleChangeCurve;
     [SerializeField] private float scaleDuration;
@@ -39,12 +36,6 @@ public class PlayerUI : MonoBehaviour
     {
         PlayerManager.playerManager.playerCombat.DamageTaken -= UpdateHealth;
         PlayerManager.playerManager.playerController.SpeedTierChanged -= SpeedTierChanged;
-    }
-
-    private void Update()
-    {
-        velocityDebug.text = "Velocity: " + PlayerManager.playerManager.playerController.rb.velocity.magnitude.ToString();
-        chargeDebug.text = "Charge: " + (chargeBar.value / chargeBar.maxValue).ToString() + "%";
     }
 
     private void SetupHealth()
@@ -112,5 +103,10 @@ public class PlayerUI : MonoBehaviour
 
             chargeBar.transform.localScale = Vector3.Lerp(startingScale, newScale, scaleChangeCurve.Evaluate(currentTime / scaleDuration));
         }
+    }
+
+    public void CollectableAdded(Collectable c)
+    {
+
     }
 }

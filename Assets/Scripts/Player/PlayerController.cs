@@ -227,6 +227,7 @@ public class PlayerController : MonoBehaviour
 
     public void Pickup(Collectable c){
         //pickup
+        PlayerManager.playerManager.CollectableCollected(c);
         Destroy(c.gameObject);
     }
     public void BulletCollisison(Bullet b)

@@ -55,4 +55,10 @@ public class PlayerManager : MonoBehaviour
         GameObject ui = Instantiate(uiPrefab);
         playerUI = ui.GetComponentInChildren<PlayerUI>();
     }
+
+    public void CollectableCollected(Collectable c)
+    {
+        playerStats.CollectableAdded(c);
+        playerUI.CollectableAdded(c);
+    }
 }
