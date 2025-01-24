@@ -790,6 +790,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6728774536433615763, guid: 49f3c0c247d0e244781cd920b906d137, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728774536433615763, guid: 49f3c0c247d0e244781cd920b906d137, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728774536433615763, guid: 49f3c0c247d0e244781cd920b906d137, type: 3}
+      propertyPath: SizeModule.separateAxes
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6973317081190369789, guid: 49f3c0c247d0e244781cd920b906d137, type: 3}
       propertyPath: m_Layer
       value: 6

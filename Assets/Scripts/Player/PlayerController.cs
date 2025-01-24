@@ -214,4 +214,15 @@ public class PlayerController : MonoBehaviour
     {
         rb.AddForce(attackDir, ForceMode2D.Impulse);
     }
+
+
+    public void Pickup(Collectable c){
+        //pickup
+        Destroy(c.gameObject);
+    }
+    public void BulletCollisison(Bullet b)
+    {
+        PlayerManager.playerManager.playerCombat.TakeDamage(b.damageAmount);
+        Destroy(b.gameObject);
+    }
 }
