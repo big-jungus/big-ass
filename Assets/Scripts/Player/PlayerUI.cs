@@ -14,6 +14,8 @@ public class PlayerUI : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private Slider chargeBar;
+    [SerializeField] private TMP_Text bigCoinText;
+    [SerializeField] private TMP_Text smallCoinText;
 
     [Header("Charge Bar Animation")]
     [SerializeField] private AnimationCurve scaleChangeCurve;
@@ -21,7 +23,17 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private List<float> scaleTiers = new List<float>();
     private Coroutine scaleChangeRoutine;
 
-    public bool isPaused;
+    [Header("Coin Collected Animation")]
+    [SerializeField] private AnimationCurve scaleCurve;
+    [SerializeField] private float animationDuration;
+    [SerializeField] private float rotationAmount;
+    [SerializeField] private float numShakes;
+    [SerializeField] private float scaleMult;
+    [SerializeField] private float returnDuration;
+    private Coroutine bigCoinCollectedRoutine;
+    private Coroutine smallCoinCollectedRoutine;
+
+    [HideInInspector] public bool isPaused;
 
     private void Start()
     {
@@ -107,6 +119,64 @@ public class PlayerUI : MonoBehaviour
 
     public void CollectableAdded(Collectable c)
     {
+        switch (c.collectableType)
+        {
+            case Collectable.CollectableTypes.BigCoin:
+                if (bigCoinCollectedRoutine != null)
+                    StopCoroutine(bigCoinCollectedRoutine);
 
+                bigCoinCollectedRoutine = StartCoroutine(CoinCollectedAnimation(bigCoinText));
+                bigCoinText.text = PlayerManager.playerManager.playerStats.bigCoinCount.ToString();
+                break;
+            case Collectable.CollectableTypes.SmallCoin:
+                if (smallCoinCollectedRoutine != null)
+                    StopCoroutine(smallCoinCollectedRoutine);
+
+                smallCoinCollectedRoutine = StartCoroutine(CoinCollectedAnimation(smallCoinText));
+                bigCoinText.text = PlayerManager.playerManager.playerStats.smallCoinCount.ToString();
+                break;
+        }
+    }
+
+    private IEnumerator CoinCollectedAnimation(TMP_Text text)
+    {
+        Vector3 startingScale = text.transform.localScale;
+        Vector3 newScale = startingScale * scaleMult;
+
+        bool rotDir = true;
+        float rotTime = 0f;
+        float rotMaxTime = animationDuration / numShakes;
+        float startingRot = text.transform.localEulerAngles.z;
+
+        float currentTime = 0f;
+
+        while (currentTime < animationDuration)
+        {
+            yield return null;
+            currentTime += Time.deltaTime;
+
+            text.transform.localScale = Vector3.Lerp(startingScale, newScale, scaleCurve.Evaluate(currentTime / animationDuration));
+
+            rotTime += Time.deltaTime;
+            if (rotTime >= rotMaxTime)
+            {
+                rotDir = !rotDir;
+                rotTime = 0f;
+                startingRot = text.transform.localEulerAngles.z;
+            }
+
+            text.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(startingRot, rotDir ? rotationAmount : -rotationAmount, rotTime / rotMaxTime));
+        }
+
+        currentTime = 0f;
+        startingRot = text.transform.localEulerAngles.z;
+        while (currentTime < returnDuration)
+        {
+            yield return null;
+            currentTime += Time.deltaTime;
+
+            text.transform.localScale = Vector3.Lerp(newScale, Vector3.one, scaleCurve.Evaluate(currentTime / returnDuration));
+            text.transform.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(startingRot, 0, currentTime / returnDuration));
+        }
     }
 }
