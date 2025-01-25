@@ -9,11 +9,16 @@ public class MoveableObject : MonoBehaviour
     private int currentNode;
     private bool direction;
 
+    [SerializeField] private bool isActive = true;
+    private Coroutine movementRoutine;
+
     private void Start()
     {
         currentNode = 1; // Should start moving towards 2nd node bc first node is starting point
         direction = true;
-        StartCoroutine(MovementRoutine());
+
+        if (isActive)
+            movementRoutine = StartCoroutine(MovementRoutine());
     }
 
     private IEnumerator MovementRoutine()
@@ -54,5 +59,10 @@ public class MoveableObject : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SwitchActivated()
+    {
+        
     }
 }
