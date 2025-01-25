@@ -117,9 +117,9 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public void CollectableAdded(Collectable c)
+    public void CollectableAdded(Collectable.CollectableTypes c)
     {
-        switch (c.collectableType)
+        switch (c)
         {
             case Collectable.CollectableTypes.BigCoin:
                 if (bigCoinCollectedRoutine != null)

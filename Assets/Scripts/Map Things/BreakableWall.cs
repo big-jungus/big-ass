@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BreakableWall : MonoBehaviour
 {
-    [SerializeField] private float minVelocity;
+    [SerializeField] protected float minVelocity;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -15,7 +15,7 @@ public class BreakableWall : MonoBehaviour
         }
     }
 
-    private void DestroyWall()
+    protected void DestroyWall()
     {
         Destroy(this.gameObject);
     }

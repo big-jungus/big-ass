@@ -65,7 +65,7 @@ public class PlayerManager : MonoBehaviour
             return;
         }
 
-        playerStats.CollectableAdded(c);
-        playerUI.CollectableAdded(c);
+        playerStats.CollectableAdded(c.collectableType, 1);
+        playerUI.CollectableAdded(c.collectableType);
     }
 }

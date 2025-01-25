@@ -38,16 +38,29 @@ public class PlayerStats : MonoBehaviour
         return ChargeUpgrade ? maxForceMagnitude + (maxForceMagnitude * velocityUpgradeAmount) : maxForceMagnitude;
     }
 
-    public void CollectableAdded(Collectable c)
+    public void CollectableAdded(Collectable.CollectableTypes c, int amount)
     {
-        switch (c.collectableType)
+        switch (c)
         {
             case Collectable.CollectableTypes.SmallCoin:
-                smallCoinCount++;
+                smallCoinCount += amount;
                 break;
             case Collectable.CollectableTypes.BigCoin:
-                bigCoinCount++;
+                bigCoinCount += amount;
                 break;
+        }
+    }
+
+    public int GetCollectableAmount(Collectable.CollectableTypes c)
+    {
+        switch (c)
+        {
+            case Collectable.CollectableTypes.SmallCoin:
+                return smallCoinCount;
+            case Collectable.CollectableTypes.BigCoin:
+                return bigCoinCount;
+            default:
+                return 0;
         }
     }
 }
