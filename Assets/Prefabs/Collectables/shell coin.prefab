@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2997645874775805342}
   - component: {fileID: 6995227202480906215}
   m_Layer: 0
-  m_Name: big thing
+  m_Name: shell coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 148560593
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dee02a606daf1b8438f26ed280667057, type: 3}
-  m_Color: {r: 1, g: 0.9450981, b: 0.28627452, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 876ac10f3f62a4541808bbe92fe7c5e3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -134,3 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  collectableType: 0
+  moveAmount: 0.1
+  moveFrequency: 8

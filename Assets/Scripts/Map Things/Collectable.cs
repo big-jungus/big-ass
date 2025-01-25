@@ -6,6 +6,18 @@ public class Collectable : MonoBehaviour
 {
     public int score;
     public CollectableTypes collectableType;
+    public enum CollectableTypes
+    {
+        BigCoin,
+        SmallCoin,
+        Win,
+    }
+    [Header("Idle")]
+    [SerializeField] float moveAmount = 1;
+    [SerializeField] float moveFrequency = 1;
+    [SerializeField] bool randomTime = true;
+    Vector2 origin;
+    float timeOffset;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,10 +27,13 @@ public class Collectable : MonoBehaviour
         }
     }
 
-    public enum CollectableTypes
-    {
-        BigCoin,
-        SmallCoin,
-        Win,
+    void Start(){
+        origin = transform.position;
+        if(randomTime)
+            timeOffset = Random.Range(0, 360);
     }
+    void Update(){
+        transform.position = origin + new Vector2(0, moveAmount * Mathf.Sin(moveFrequency * (Time.time + timeOffset)));
+    }
+
 }
