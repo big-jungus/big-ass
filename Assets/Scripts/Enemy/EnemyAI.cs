@@ -26,6 +26,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private List<Vector2> pathNodes = new List<Vector2>();
     private int pathCounter;
 
+    [SerializeField] private bool isActive = true;
+
     private void Start()
     {
         switch (movement)
@@ -70,6 +72,9 @@ public class EnemyAI : MonoBehaviour
     private void FixedUpdate()
     {
         if (currentPath == null)
+            return;
+
+        if (!isActive)
             return;
 
         if (currentWaypoint >= currentPath.vectorPath.Count)
@@ -134,5 +139,10 @@ public class EnemyAI : MonoBehaviour
     {
         FollowPlayer,
         FollowPath,
+    }
+
+    public void SwitchActivated()
+    {
+        isActive = !isActive;
     }
 }

@@ -63,6 +63,16 @@ public class MoveableObject : MonoBehaviour
 
     public void SwitchActivated()
     {
-        
+        if (isActive)
+        {
+            if (movementRoutine != null)
+                StopCoroutine(movementRoutine);
+        }
+        else
+        {
+            movementRoutine = StartCoroutine(MovementRoutine());
+        }
+
+        isActive = !isActive;
     }
 }
