@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 908d74d5d3f9c10409e40b602d179928
+guid: aa75bacdae7602c4eb3245445288c802
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,139 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fishes_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd0d051e8f00c1f4b9bd72a3eb68b44d
-      internalID: 184388638
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishes_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b8f64062fff642f49a6c5ea791466637
-      internalID: 1116101340
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishes_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49844f4f27fce6044a56fcc3274389c8
-      internalID: -106207136
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishes_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f514cc57e617e04ba714fd046d97690
-      internalID: 1799203826
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishes_4
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2bddf5a4fd00cc44fa5ed9955ca9ff56
-      internalID: -580096443
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishes_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 837b242a1faa1ed4995d510cde0388ae
-      internalID: -1504516092
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishes_6
+      name: bubble tiny_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fab81cb040b0d34eb11076f7d5300ae
-      internalID: 2084722156
+      spriteID: 8d4f6e31883965540980f54efed72c9e
+      internalID: -399989169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishes_7
+      name: bubble tiny_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 10
         y: 0
-        width: 32
-        height: 32
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e4895d33f255674791b0c537e24ae88
-      internalID: 241635803
+      spriteID: 9ea87cc659500a042a8767905936bdf1
+      internalID: -1498984081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishes_8
+      name: bubble tiny_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 20
         y: 0
-        width: 32
-        height: 32
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,8 +153,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e1f80347738e2a42802f3f82c6d03f8
-      internalID: 1255737326
+      spriteID: babcba7fc4b08f148b7c90e440effdaf
+      internalID: 144962231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubble tiny_3
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 635906eb542e09c4789bdc23584aa756
+      internalID: 902978525
       vertices: []
       indices: 
       edges: []
@@ -296,15 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      fishes_0: 184388638
-      fishes_1: 1116101340
-      fishes_2: -106207136
-      fishes_3: 1799203826
-      fishes_4: -580096443
-      fishes_5: -1504516092
-      fishes_6: 2084722156
-      fishes_7: 241635803
-      fishes_8: 1255737326
+      bubble tiny_0: -399989169
+      bubble tiny_1: -1498984081
+      bubble tiny_2: 144962231
+      bubble tiny_3: 902978525
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

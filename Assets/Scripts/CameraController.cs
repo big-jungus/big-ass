@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     Transform t;
     Transform playerTransform;
+    [SerializeField] GameObject[] stagnantObjects;
     // Start is called before the first frame update
     public void Setup()
     {
@@ -23,5 +25,8 @@ public class CameraController : MonoBehaviour
         }
 
         t.position = new Vector3(playerTransform.position.x, playerTransform.position.y, -10) ;
+        foreach(GameObject o in stagnantObjects){
+            o.transform.position = new Vector3(t.position.x, t.position.y, o.transform.position.z);
+        }
     }
 }
