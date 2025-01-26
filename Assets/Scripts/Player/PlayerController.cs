@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float stopDrag;
     [SerializeField] private float lastBounceCheckDuration;
     [SerializeField] private float bounceTierReduction;
+    [SerializeField] private float chargeResetTimer;
     private Coroutine lastBounceRoutine;
 
     private Vector2 chargeStartLocation;
@@ -148,7 +149,39 @@ public class PlayerController : MonoBehaviour
         if (!PlayerManager.playerManager.playerStats.StopUpgrade)
             return;
 
-        rb.velocity = Vector2.zero;
+        if (isCharging)
+        {
+            currentChargeDuration = 0;
+            currentSpeedTier = 0;
+            isCharging = false;
+
+            StartCoroutine(ChargeResetTimer());
+
+            PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+            ChargeEnded?.Invoke();
+        }
+        else
+        {
+            currentSpeedTier = 0;
+            rb.velocity = Vector2.zero;
+            rb.drag = 0;
+            canCharge = true;
+            VelocityUpdated?.Invoke(rb.velocity.magnitude);
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+
+            currentChargeDuration = 0;
+            PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
+
+            arrow.Show();
+        }
+    }
+
+    private IEnumerator ChargeResetTimer()
+    {
+        canCharge = false;
+        yield return new WaitForSeconds(chargeResetTimer);
+        canCharge = true;
     }
 
     public void SpikeCollisison(int damageAmount)
