@@ -16,6 +16,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Slider chargeBar;
     [SerializeField] private TMP_Text bigCoinText;
     [SerializeField] private TMP_Text smallCoinText;
+    public DirectionArrow directionArrow;
 
     [Header("Charge Bar Animation")]
     [SerializeField] private AnimationCurve scaleChangeCurve;

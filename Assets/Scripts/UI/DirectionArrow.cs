@@ -54,7 +54,7 @@ public class DirectionArrow : MonoBehaviour
         transform.parent.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
-    private void EndCharge()
+    public void EndCharge()
     {
         StartCoroutine(Compaction());
     }

@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
     private DirectionArrow arrow;
 
     private float currentChargeDuration;
-    private bool canCharge;
-    private bool isCharging;
+    private bool canCharge = true;
+    private bool isCharging = false;
+    private bool isCannon = false;
 
     private float currentSpeedTier;
 
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
         charge.action.started += Charge;
         charge.action.canceled += Release;
         stop.action.performed += Stop;
-        canCharge = true;
     }
 
     private void OnDisable()
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerManager.playerManager.playerUI.isPaused)
             return;
 
-        if (!canCharge)
+        if (!canCharge || isCannon)
             return;
 
         isCharging = true;
@@ -84,6 +84,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (isCannon)
+            return;
+
         currentChargeDuration = Mathf.Clamp(currentChargeDuration + Time.deltaTime, 0, PlayerManager.playerManager.playerStats.maxChargeDuration);
         PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
         Charging?.Invoke(currentChargeDuration);
@@ -102,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerManager.playerManager.playerUI.isPaused)
             return;
 
-        if (!canCharge)
+        if (!canCharge || isCannon)
             return;
 
         // Charge Meter
@@ -234,5 +237,15 @@ public class PlayerController : MonoBehaviour
     {
         PlayerManager.playerManager.playerCombat.TakeDamage(b.damageAmount);
         Destroy(b.gameObject);
+    }
+
+    public void AttachedToCannon()
+    {
+
+    }
+
+    public void CannonFire()
+    {
+
     }
 }
