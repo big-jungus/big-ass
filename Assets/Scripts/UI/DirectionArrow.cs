@@ -24,6 +24,8 @@ public class DirectionArrow : MonoBehaviour
     private SpriteRenderer[] srs;
     private Coroutine flashRoutine;
 
+    [HideInInspector] public bool shouldFlash = true;
+
     private void Start()
     {
         PlayerManager.playerManager.playerController.Charging += Charge;
@@ -60,7 +62,7 @@ public class DirectionArrow : MonoBehaviour
     }
 
 
-    private void Charge(float currentCharge)
+    public void Charge(float currentCharge)
     {
         float percent = currentCharge / PlayerManager.playerManager.playerStats.maxChargeDuration;
         float spacing = Mathf.Lerp(0, maxSpace, percent);
@@ -112,6 +114,9 @@ public class DirectionArrow : MonoBehaviour
 
     private void CheckForMaxCharge(float currentCharge)
     {
+        if (!shouldFlash)
+            return;
+
         if (currentCharge == PlayerManager.playerManager.playerStats.maxChargeDuration)
         {
             if (flashRoutine == null)

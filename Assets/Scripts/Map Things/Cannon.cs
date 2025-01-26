@@ -29,7 +29,7 @@ public class Cannon : MonoBehaviour
             return;
 
         isPlayerAttached = true;
-        PlayerManager.playerManager.playerController.AttachedToCannon();
+        PlayerManager.playerManager.playerController.AttachedToCannon(this);
     }
 
     private IEnumerator LockoutTimer()

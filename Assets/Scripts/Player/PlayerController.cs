@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference mouseLocation;
     [SerializeField] private InputActionReference stop;
     public Rigidbody2D rb;
-    private DirectionArrow arrow;
+    public DirectionArrow arrow;
 
     private float currentChargeDuration;
     private bool canCharge = true;
@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private bool isCannon = false;
 
     private float currentSpeedTier;
+
+    private Coroutine cannonCharge;
 
     [Header("Other")]
     [SerializeField] private float stopDrag;
@@ -239,13 +241,42 @@ public class PlayerController : MonoBehaviour
         Destroy(b.gameObject);
     }
 
-    public void AttachedToCannon()
+    public void AttachedToCannon(Cannon cannon)
     {
+        isCannon = true;
 
+        arrow.Show();
+        arrow.shouldFlash = false;
+
+        PlayerManager.playerManager.playerUI.UpdateCharge(PlayerManager.playerManager.playerStats.maxChargeDuration);
+        ChargeStarted?.Invoke();
+        cannonCharge = StartCoroutine(CannonChargeEventCall());
+
+        rb.velocity = Vector2.zero;
+        PlayerManager.playerManager.playerObj.transform.position = cannon.transform.position;
+
+        currentChargeDuration = PlayerManager.playerManager.playerStats.maxChargeDuration;
+        currentSpeedTier = PlayerManager.playerManager.playerStats.maxChargeTier - 1;
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+    }
+
+    private IEnumerator CannonChargeEventCall()
+    {
+        while (true)
+        {
+            yield return null;
+            Charging?.Invoke(PlayerManager.playerManager.playerStats.maxChargeDuration);
+        }
     }
 
     public void CannonFire()
     {
+        if (cannonCharge != null)
+            StopCoroutine(cannonCharge);
 
+        isCannon = false;
+        arrow.shouldFlash = true;
+
+        Release(new InputAction.CallbackContext());
     }
 }

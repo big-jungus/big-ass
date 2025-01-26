@@ -40,6 +40,11 @@ public class PlayerManager : MonoBehaviour
         SceneManager.sceneLoaded += LevelLoaded;
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= LevelLoaded;
+    }
+
     public void LevelLoaded(Scene newScene, LoadSceneMode loadScene)
     {
         if (newScene.name == "MainMenu")
@@ -54,6 +59,8 @@ public class PlayerManager : MonoBehaviour
 
         GameObject ui = Instantiate(uiPrefab);
         playerUI = ui.GetComponentInChildren<PlayerUI>();
+
+        FindObjectOfType<CameraController>().Setup();
     }
 
     public void CollectableCollected(Collectable c)

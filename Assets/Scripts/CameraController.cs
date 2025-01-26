@@ -7,10 +7,10 @@ public class CameraController : MonoBehaviour
     Transform t;
     Transform playerTransform;
     // Start is called before the first frame update
-    void Start()
+    public void Setup()
     {
         t = transform;
-        playerTransform = FindObjectOfType<PlayerController>().gameObject.transform;
+        playerTransform = PlayerManager.playerManager.playerObj.transform;
     }
 
     // Update is called once per frame
