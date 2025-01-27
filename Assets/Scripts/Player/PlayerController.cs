@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public Action<float> VelocityUpdated;
     public Action<int> SpeedTierChanged;
     public Action<Vector2, Collision2D> CollisionOccured;
+    public Action<Vector3, Collectable.CollectableTypes> CollectableCollected;
 
     void Start(){
         arrow = GetComponentInChildren<DirectionArrow>();
@@ -265,9 +266,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void Pickup(Collectable c){
+    public void Pickup(Collectable c, Vector3 location){
         //pickup
         PlayerManager.playerManager.CollectableCollected(c);
+        CollectableCollected?.Invoke(location, c.collectableType);
         Destroy(c.gameObject);
     }
     public void BulletCollisison(Bullet b)

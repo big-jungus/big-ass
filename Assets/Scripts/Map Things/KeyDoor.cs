@@ -16,7 +16,6 @@ public class KeyDoor : BreakableWall
                 if (PlayerManager.playerManager.playerStats.GetCollectableAmount(requiredCurrency) >= currencyAmount)
                 {
                     PlayerManager.playerManager.playerStats.CollectableAdded(requiredCurrency, -currencyAmount);
-                    PlayerManager.playerManager.playerUI.CollectableAdded(requiredCurrency);
                     DestroyWall();
                 }
             }

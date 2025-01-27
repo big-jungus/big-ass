@@ -75,6 +75,5 @@ public class PlayerManager : MonoBehaviour
         }
 
         playerStats.CollectableAdded(c.collectableType, 1);
-        playerUI.CollectableAdded(c.collectableType);
     }
 }

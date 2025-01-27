@@ -39,6 +39,7 @@ public class PlayerUI : MonoBehaviour
     {
         PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
         PlayerManager.playerManager.playerController.SpeedTierChanged += SpeedTierChanged;
+        PlayerManager.playerManager.playerController.CollectableCollected += CollectableAdded;
 
         SetupHealth();
         UpdateCharge(0);
@@ -48,6 +49,7 @@ public class PlayerUI : MonoBehaviour
     {
         PlayerManager.playerManager.playerCombat.DamageTaken -= UpdateHealth;
         PlayerManager.playerManager.playerController.SpeedTierChanged -= SpeedTierChanged;
+        PlayerManager.playerManager.playerController.CollectableCollected -= CollectableAdded;
     }
 
     private void SetupHealth()
@@ -117,7 +119,7 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public void CollectableAdded(Collectable.CollectableTypes c)
+    public void CollectableAdded(Vector3 location, Collectable.CollectableTypes c)
     {
         switch (c)
         {
@@ -133,7 +135,7 @@ public class PlayerUI : MonoBehaviour
                     StopCoroutine(smallCoinCollectedRoutine);
 
                 smallCoinCollectedRoutine = StartCoroutine(CoinCollectedAnimation(smallCoinText));
-                bigCoinText.text = PlayerManager.playerManager.playerStats.smallCoinCount.ToString();
+                smallCoinText.text = PlayerManager.playerManager.playerStats.smallCoinCount.ToString();
                 break;
         }
     }
