@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject playerObj;
     public LevelManager levelManager;
     public EffectsManager effectsManager;
+    public SoundManager soundManager;
 
     [Header("Required Prefabs")]
     [SerializeField] private GameObject playerPrefab;

@@ -45,4 +45,19 @@ public class PauseMenu : MonoBehaviour
     {
         PlayerManager.playerManager.levelManager.ReloadLevel();
     }
+
+    public void MasterVolumeChanged(float volume)
+    {
+        PlayerManager.playerManager.soundManager.SetMasterVolume(volume);
+    }
+
+    public void SFXVolumeChanged(float volume)
+    {
+        PlayerManager.playerManager.soundManager.SetSoundFXVolume(volume);
+    }
+
+    public void MusicVolumeChanged(float volume)
+    {
+        PlayerManager.playerManager.soundManager.SetMusicVolume(volume);
+    }
 }
