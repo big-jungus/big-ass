@@ -38,6 +38,7 @@ public class PlayerCombat : CombatBase
             {
                 collision.gameObject.GetComponent<CombatBase>().TakeDamage(0);
                 PlayerManager.playerManager.effectsManager.EnemyKill(collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
+                PlayerManager.playerManager.soundManager.ObjectKilled(collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
             }
         }
     }

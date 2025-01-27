@@ -21,8 +21,10 @@ public class BreakableWall : MonoBehaviour
         {
             if (PlayerManager.playerManager.playerController.rb.velocity.magnitude >= minVelocity)
             {
-                DestroyWall();
                 PlayerManager.playerManager.effectsManager.WallBreak(collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
+                PlayerManager.playerManager.soundManager.ObjectKilled(collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
+
+                DestroyWall();
             }
         }
     }

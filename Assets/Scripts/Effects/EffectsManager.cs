@@ -9,11 +9,13 @@ public class EffectsManager : MonoBehaviour
     private void Start()
     {
         PlayerManager.playerManager.playerController.CollisionOccured += WallCollision;
+        PlayerManager.playerManager.playerController.CollectableCollected += CollectableCollected;
     }
 
     private void OnDestroy()
     {
         PlayerManager.playerManager.playerController.CollisionOccured -= WallCollision;
+        PlayerManager.playerManager.playerController.CollectableCollected -= CollectableCollected;
     }
 
     public void SpawnHitSpark(Vector3 position)
@@ -32,7 +34,7 @@ public class EffectsManager : MonoBehaviour
 
     }
 
-    public void CollectableCollected(Vector3 position)
+    public void CollectableCollected(Vector3 position, Collectable.CollectableTypes c)
     {
 
     }

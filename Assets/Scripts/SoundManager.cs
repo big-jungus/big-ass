@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip wallCollision;
     [SerializeField] private AudioClip playerDamaged;
     [SerializeField] private AudioClip collectableCollected;
+    [SerializeField] private AudioClip objectKilled;
 
     private void Start()
     {
@@ -40,12 +41,17 @@ public class SoundManager : MonoBehaviour
 
     private void PlayerDamaged(int damage)
     {
-        PlaySoundFXVariance(playerDamaged, PlayerManager.playerManager.playerObj.transform.position, 1f);
+        //PlaySoundFXVariance(playerDamaged, PlayerManager.playerManager.playerObj.transform.position, 1f);
     }
 
     private void CollectableCollected(Vector3 position, Collectable.CollectableTypes type)
     {
         //PlaySoundFXVariance(collectableCollected, position, 1f);
+    }
+
+    public void ObjectKilled(Vector3 position)
+    {
+        //PlaySoundFXVariance(objectKilled, position, 1f);
     }
 
     // Play Sounds
