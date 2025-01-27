@@ -372,6 +372,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 3698559970998511830, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
+      propertyPath: maxMovementConstraints.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698559970998511830, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
+      propertyPath: maxMovementConstraints.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698559970998511830, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
+      propertyPath: movementSpeedCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698559970998511830, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
+      propertyPath: movementSpeedCurve.m_Curve.Array.data[1].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698559970998511830, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
+      propertyPath: movementSpeedCurve.m_Curve.Array.data[1].inSlope
+      value: 10.427786
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698559970998511830, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
+      propertyPath: movementSpeedCurve.m_Curve.Array.data[1].inWeight
+      value: 0.032258093
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698559970998511830, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
+      propertyPath: movementSpeedCurve.m_Curve.Array.data[1].outSlope
+      value: 10.427786
+      objectReference: {fileID: 0}
     - target: {fileID: 9006588212646603875, guid: 75d1507e205a385478d455b876f71fdf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
