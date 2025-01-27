@@ -24,7 +24,7 @@ public class EffectsManager : MonoBehaviour
 
     private void WallCollision(Vector2 dir, Collision2D collision)
     {
-        //SpawnHitSpark(collision.GetContact(0).point);
+        SpawnHitSpark(collision.GetContact(0).point);
     }
 
     public void EnemyKill(Vector3 position)

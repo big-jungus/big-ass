@@ -223,7 +223,6 @@ public class PlayerController : MonoBehaviour
         VelocityUpdated?.Invoke(rb.velocity.magnitude);
         SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
 
-
         arrow.Show();
     }
 
@@ -236,9 +235,13 @@ public class PlayerController : MonoBehaviour
             currentSpeedTier -= bounceTierReduction;
 
             rb.velocity = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetSpeedValue(GetCurrentSpeedTier());
+            rb.drag = 0f;
             VelocityUpdated?.Invoke(rb.velocity.magnitude);
             SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
         }
+
+        if (currentSpeedTier <= 0)
+            rb.drag = stopDrag;
 
         if (lastBounceRoutine != null)
             StopCoroutine(lastBounceRoutine);

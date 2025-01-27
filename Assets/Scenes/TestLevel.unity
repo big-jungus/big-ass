@@ -369,7 +369,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3087594364156669326, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
   m_PrefabInstance: {fileID: 420673404302850648}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1991930046
+--- !u!114 &1991930050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,10 +378,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991930045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a34a25d85f94a45858bd007100c273, type: 3}
+  m_Script: {fileID: 11500000, guid: e3366c2c67d5036489f69ff113540342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSparkPrefab: {fileID: 3503825334686189645, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
 --- !u!1001 &420673404302850648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,17 +433,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7854325423066794344, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
-      propertyPath: effectsManager
+    - target: {fileID: 5114032906500074419, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: hitSparkPrefab
       value: 
-      objectReference: {fileID: 1991930046}
+      objectReference: {fileID: 4531517889755008041, guid: a720f4082e3902f4fb4e20268825b910, type: 3}
+    - target: {fileID: 7691173740739947920, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: speedTierValues.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691173740739947920, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: speedTierValues.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691173740739947920, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: speedTierValues.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691173740739947920, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: speedTierValues.Array.data[2]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691173740739947920, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: speedTierValues.Array.data[3]
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691173740739947920, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: speedTierValues.Array.data[4]
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3087594364156669326, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1991930046}
+      addedObject: {fileID: 1991930050}
   m_SourcePrefab: {fileID: 100100000, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
 --- !u!1001 &6690952082756247072
 PrefabInstance:
