@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     public Action ChargeEnded;
     public Action<float> VelocityUpdated;
     public Action<int> SpeedTierChanged;
-
     public Action<Vector2> CollisionOccured;
 
     void Start(){
@@ -230,7 +229,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CollisionOccured?.Invoke(rb.velocity);
+        CollisionOccured?.Invoke(rb.velocity.normalized);
 
         if (currentSpeedTier > 0)
         {
