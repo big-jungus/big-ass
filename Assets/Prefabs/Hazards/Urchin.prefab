@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  prefab: {fileID: 4531517889755008041, guid: a720f4082e3902f4fb4e20268825b910, type: 3}
 --- !u!50 &6856007132878829094
 Rigidbody2D:
   serializedVersion: 4
@@ -115,7 +116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 148560593
-  m_SortingLayer: 5
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 93434349, guid: 9fc51b307b619e94bacefcdcf2368427, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
