@@ -33,6 +33,19 @@ public class PlayerStats : MonoBehaviour
         return speedTierValues[tier];
     }
 
+    public int GetTierFromSpeed(float speed)
+    {
+        int roundedSpeed = Mathf.RoundToInt(Mathf.Clamp(speed, 0, speedTierValues[speedTierValues.Count - 1]));
+
+        for (int i = 0; i < speedTierValues.Count; i++)
+        {
+            if (roundedSpeed <= speedTierValues[i])
+                return i;
+        }
+
+        return speedTierValues.Count - 1;
+    }
+
     public float GetMaxVelocity()
     {
         return ChargeUpgrade ? maxForceMagnitude + (maxForceMagnitude * velocityUpgradeAmount) : maxForceMagnitude;

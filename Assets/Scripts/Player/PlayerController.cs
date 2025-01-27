@@ -312,4 +312,14 @@ public class PlayerController : MonoBehaviour
 
         Release(new InputAction.CallbackContext());
     }
+
+    public void OnPushTile(Vector2 pushForce)
+    {
+        rb.AddForce(pushForce);
+
+        VelocityUpdated?.Invoke(rb.velocity.magnitude);
+
+        currentSpeedTier = PlayerManager.playerManager.playerStats.GetTierFromSpeed(rb.velocity.magnitude);
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+    }
 }

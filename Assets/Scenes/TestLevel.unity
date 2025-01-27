@@ -430,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a4c29258b89e0489d50ca676b48cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stagnantObjects: []
 --- !u!114 &952901052
 MonoBehaviour:
   m_ObjectHideFlags: 0
