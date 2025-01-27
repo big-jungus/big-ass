@@ -28,7 +28,7 @@ public class CollisionShake : MonoBehaviour
         PlayerManager.playerManager.playerController.CollisionOccured -= WallCollision;
     }
 
-    private void WallCollision(Vector2 dir)
+    private void WallCollision(Vector2 dir, Collision2D collision)
     {
         if (shakeRoutine != null)
             StopCoroutine(shakeRoutine);

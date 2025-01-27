@@ -20,7 +20,10 @@ public class BreakableWall : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             if (PlayerManager.playerManager.playerController.rb.velocity.magnitude >= minVelocity)
+            {
                 DestroyWall();
+                PlayerManager.playerManager.effectsManager.WallBreak(collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
+            }
         }
     }
 

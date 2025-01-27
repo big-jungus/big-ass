@@ -35,7 +35,10 @@ public class PlayerCombat : CombatBase
             bool dirCheck = Vector2.Dot(collision.transform.position - transform.parent.position, PlayerManager.playerManager.playerController.rb.velocity) > 0;
 
             if (speedCheck && dirCheck)
+            {
                 collision.gameObject.GetComponent<CombatBase>().TakeDamage(0);
+                PlayerManager.playerManager.effectsManager.EnemyKill(collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
+            }
         }
     }
 

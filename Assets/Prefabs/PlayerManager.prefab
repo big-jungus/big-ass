@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1668775133949245603}
   - component: {fileID: 7854325423066794344}
   - component: {fileID: 7691173740739947920}
+  - component: {fileID: 5114032906500074419}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   playerUI: {fileID: 0}
   playerObj: {fileID: 0}
   levelManager: {fileID: 7142230465445444075}
+  effectsManager: {fileID: 5114032906500074419}
   playerPrefab: {fileID: 1714026339044203799, guid: 5a4f83bc04f87fc4792f572357a3e8c5, type: 3}
   uiPrefab: {fileID: 8252242280699906541, guid: 287edf2173e77b24d87a46f5bcda1071, type: 3}
 --- !u!114 &7691173740739947920
@@ -80,6 +82,21 @@ MonoBehaviour:
   chargeUpgradeAmount: 0.5
   velocityUpgradeAmount: 0.5
   StopUpgrade: 1
+  bigCoinCount: 0
+  smallCoinCount: 0
+--- !u!114 &5114032906500074419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3087594364156669326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a34a25d85f94a45858bd007100c273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSparkPrefab: {fileID: 3503825334686189645, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
 --- !u!1 &9073888015512205775
 GameObject:
   m_ObjectHideFlags: 0

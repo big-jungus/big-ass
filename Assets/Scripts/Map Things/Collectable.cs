@@ -24,6 +24,7 @@ public class Collectable : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerManager.playerManager.playerController.Pickup(this);
+            PlayerManager.playerManager.effectsManager.CollectableCollected(collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
         }
     }
 

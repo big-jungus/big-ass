@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public Action ChargeEnded;
     public Action<float> VelocityUpdated;
     public Action<int> SpeedTierChanged;
-    public Action<Vector2> CollisionOccured;
+    public Action<Vector2, Collision2D> CollisionOccured;
 
     void Start(){
         arrow = GetComponentInChildren<DirectionArrow>();
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CollisionOccured?.Invoke(rb.velocity.normalized);
+        CollisionOccured?.Invoke(rb.velocity.normalized, collision);
 
         if (currentSpeedTier > 0)
         {

@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void WallCollision(Vector2 dir)
+    private void WallCollision(Vector2 dir, Collision2D collision)
     {
         if (shakeRoutine != null)
             StopCoroutine(shakeRoutine);

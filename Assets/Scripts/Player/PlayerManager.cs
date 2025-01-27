@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerUI playerUI;
     public GameObject playerObj;
     public LevelManager levelManager;
+    public EffectsManager effectsManager;
 
     [Header("Required Prefabs")]
     [SerializeField] private GameObject playerPrefab;
