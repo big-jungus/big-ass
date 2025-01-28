@@ -147,7 +147,16 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 5238ed6ab79bb9e4eba0678075272650, type: 2}
   soundFXPrefab: {fileID: 8717602867167756619, guid: 15fde87fba0046d41a194706ec20ca21, type: 3}
   pitchVariance: 0.5
+  chargePitchRange: {x: 1, y: 2.5}
   wallCollision: {fileID: 8300000, guid: 3352a847bd97994409528a2a5e4a8da7, type: 3}
+  playerDamaged: {fileID: 0}
+  collectableCollected: {fileID: 0}
+  objectKilled: {fileID: 0}
+  chargeLoop: {fileID: 8300000, guid: 5ccb12ae9f0ffb043ba330e336946046, type: 3}
+  chargeReleased: {fileID: 0}
+  buttonEnter: {fileID: 0}
+  buttonDown: {fileID: 0}
+  buttonUp: {fileID: 0}
 --- !u!1 &4614320991312938720
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,9 +199,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5210732920811836270, guid: 5238ed6ab79bb9e4eba0678075272650, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: bb6927e2cbf656b4783120e87173e3ec, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0

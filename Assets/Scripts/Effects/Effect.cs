@@ -6,8 +6,8 @@ public class Effect : MonoBehaviour
 {
     #region Refs
     Transform t;
-    SpriteRenderer sr;
-    Animator a;
+    [SerializeField] SpriteRenderer sr;
+    [SerializeField] Animator a;
     #endregion
     public float activeTime = 0;
     public bool wobble = false;
@@ -17,8 +17,6 @@ public class Effect : MonoBehaviour
 
     void Start(){
         t = transform;
-        sr = GetComponent<SpriteRenderer>();
-        a = GetComponent<Animator>();
     }
     public virtual void Spawn(Transform parent, Color tint, float alpha = 1){
         Color c = tint;

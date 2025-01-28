@@ -93,7 +93,6 @@ public class SoundManager : MonoBehaviour
 
     private void Charging(float chargeDuration)
     {
-        /*
         if (chargeSoundSource == null)
         {
             chargeSoundSource = Instantiate(soundFXPrefab, PlayerManager.playerManager.playerObj.transform.position, Quaternion.identity);
@@ -105,15 +104,12 @@ public class SoundManager : MonoBehaviour
         }
 
         chargeSoundSource.pitch = Mathf.Lerp(chargePitchRange.x, chargePitchRange.y, chargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
-        */
     }
 
     private void ChargeEnded()
     {
-        /*
         if (chargeSoundSource != null)
             Destroy(chargeSoundSource.gameObject);
-        */
     }
 
     // Play Sounds

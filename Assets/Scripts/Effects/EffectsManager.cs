@@ -21,6 +21,7 @@ public class EffectsManager : MonoBehaviour
     public void SpawnHitSpark(Vector3 position)
     {
         GameObject sparkObj = Instantiate(hitSparkPrefab);
+        sparkObj.GetComponent<Effect>().Spawn(transform.root, Color.white, 1f);
         sparkObj.transform.position = position;
     }
 
