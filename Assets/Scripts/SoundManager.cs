@@ -12,16 +12,28 @@ public class SoundManager : MonoBehaviour
     [Header("SFX Variables")]
     [SerializeField] private float pitchVariance;
 
+    [Header("Charging Variables")]
+    [SerializeField] private Vector2 chargePitchRange;
+
     [Header("Audio Clips")]
     [SerializeField] private AudioClip wallCollision;
     [SerializeField] private AudioClip playerDamaged;
     [SerializeField] private AudioClip collectableCollected;
     [SerializeField] private AudioClip objectKilled;
+    [SerializeField] private AudioClip chargeLoop;
+    [SerializeField] private AudioClip chargeReleased;
+    [SerializeField] private AudioClip buttonEnter;
+    [SerializeField] private AudioClip buttonDown;
+    [SerializeField] private AudioClip buttonUp;
+
+    private AudioSource chargeSoundSource;
 
     private void Start()
     {
         PlayerManager.playerManager.playerController.CollisionOccured += WallCollision;
         PlayerManager.playerManager.playerCombat.DamageTaken += PlayerDamaged;
+        PlayerManager.playerManager.playerController.Charging += Charging;
+        PlayerManager.playerManager.playerController.ChargeEnded += ChargeEnded;
 
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(0.5f) * 20f);
         audioMixer.SetFloat("SoundFXVolume", Mathf.Log10(0.5f) * 20f);
@@ -32,6 +44,8 @@ public class SoundManager : MonoBehaviour
     {
         PlayerManager.playerManager.playerController.CollisionOccured -= WallCollision;
         PlayerManager.playerManager.playerCombat.DamageTaken -= PlayerDamaged;
+        PlayerManager.playerManager.playerController.Charging -= Charging;
+        PlayerManager.playerManager.playerController.ChargeEnded -= ChargeEnded;
     }
 
     private void WallCollision(Vector2 dir, Collision2D collision)
@@ -52,6 +66,54 @@ public class SoundManager : MonoBehaviour
     public void ObjectKilled(Vector3 position)
     {
         //PlaySoundFXVariance(objectKilled, position, 1f);
+    }
+
+    public void ChargeReleased(Vector3 position)
+    {
+        //PlaySoundFX(chargeReleased, position, 1f);
+    }
+
+    public void ButtonSFX(ButtonAnimations.ButtonAudioStates state, Vector3 position)
+    {
+        /*
+        switch (state)
+        {
+            case ButtonAnimations.ButtonAudioStates.Enter:
+                PlaySoundFX(buttonEnter, position, 1f);
+                break;
+            case ButtonAnimations.ButtonAudioStates.Up:
+                PlaySoundFX(buttonUp, position, 1f);
+                break;
+            case ButtonAnimations.ButtonAudioStates.Down:
+                PlaySoundFX(buttonDown, position, 1f);
+                break;
+        }
+        */
+    }
+
+    private void Charging(float chargeDuration)
+    {
+        /*
+        if (chargeSoundSource == null)
+        {
+            chargeSoundSource = Instantiate(soundFXPrefab, PlayerManager.playerManager.playerObj.transform.position, Quaternion.identity);
+            chargeSoundSource.clip = chargeLoop;
+            chargeSoundSource.volume = 1f;
+            chargeSoundSource.loop = true;
+            chargeSoundSource.pitch = Mathf.Lerp(chargePitchRange.x, chargePitchRange.y, chargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
+            chargeSoundSource.Play();
+        }
+
+        chargeSoundSource.pitch = Mathf.Lerp(chargePitchRange.x, chargePitchRange.y, chargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
+        */
+    }
+
+    private void ChargeEnded()
+    {
+        /*
+        if (chargeSoundSource != null)
+            Destroy(chargeSoundSource.gameObject);
+        */
     }
 
     // Play Sounds

@@ -19,12 +19,14 @@ public class ButtonAnimations : MonoBehaviour, IPointerEnterHandler, IPointerDow
     public void OnPointerDown(PointerEventData eventData)
     {
         PlayAnimation(downScale);
+        PlayerManager.playerManager.soundManager.ButtonSFX(ButtonAudioStates.Down, transform.position);
         isDown = true;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         PlayAnimation(enterScale);
+        PlayerManager.playerManager.soundManager.ButtonSFX(ButtonAudioStates.Enter, transform.position);
         isInside = true;
     }
 
@@ -41,7 +43,10 @@ public class ButtonAnimations : MonoBehaviour, IPointerEnterHandler, IPointerDow
     public void OnPointerUp(PointerEventData eventData)
     {
         if (isInside)
+        {
             PlayAnimation(upScale);
+            PlayerManager.playerManager.soundManager.ButtonSFX(ButtonAudioStates.Up, transform.position);
+        }
         else
             PlayAnimation(exitScale);
 
@@ -70,5 +75,12 @@ public class ButtonAnimations : MonoBehaviour, IPointerEnterHandler, IPointerDow
 
             transform.localScale = Vector3.Lerp(currentScale, goalScale, scaleCurve.Evaluate(currentTime / scaleDuration));
         }
+    }
+
+    public enum ButtonAudioStates
+    {
+        Enter,
+        Down,
+        Up
     }
 }

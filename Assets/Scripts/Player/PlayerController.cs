@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
 
         chargeStartLocation = transform.position;
 
+        PlayerManager.playerManager.soundManager.ChargeReleased(transform.position);
 
         // Reset Charge
         ChargeEnded?.Invoke();
