@@ -19,9 +19,10 @@ public class Effect : MonoBehaviour
         t = transform;
         sr = GetComponent<SpriteRenderer>();
         a = GetComponent<Animator>();
+        Spawn();
     }
-    public virtual void Spawn(Transform parent, Color tint, float alpha = 1){
-        Color c = tint;
+    public virtual void Spawn( float alpha = 1){
+        Color c = sr.color;
         c.a = alpha;
         sr.color = c;
         
