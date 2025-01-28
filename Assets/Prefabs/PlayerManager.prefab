@@ -79,7 +79,7 @@ MonoBehaviour:
   chargeMultiplier: 200
   maxForceMagnitude: 1000
   maxChargeTier: 4
-  speedTierValues: 0a000000140000001e00000028000000
+  speedTierValues: 0a000000190000002300000032000000
   ChargeUpgrade: 0
   chargeUpgradeAmount: 0.5
   velocityUpgradeAmount: 0.5
@@ -98,6 +98,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a34a25d85f94a45858bd007100c273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitCircleColors:
+  - {r: 1, g: 0.5474138, b: 0, a: 1}
+  - {r: 0.5427704, g: 0.1462264, b: 1, a: 1}
+  - {r: 0.13679248, g: 0.42041773, b: 1, a: 1}
+  hitCirclePrefab: {fileID: 4531517889755008041, guid: a720f4082e3902f4fb4e20268825b910, type: 3}
+  hitShineColors:
+  - {r: 1, g: 0.9944471, b: 0.5613208, a: 1}
+  - {r: 0.9882076, g: 0.740566, b: 1, a: 1}
+  - {r: 0.504717, g: 1, b: 0.9945574, a: 1}
+  hitShinePrefab: {fileID: 3414888285557029629, guid: f6814dd55ad313840b09eb727c4af5fe, type: 3}
+  spikeEffectColors: []
+  spikeEffectPrefab: {fileID: 0}
+  pickupColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.7520286, b: 0.34509802, a: 1}
+  - {r: 1, g: 0.9606578, b: 0.39999998, a: 1}
+  pickupSparkle: {fileID: 6293124503486404433, guid: 2cf60665880f386478db1cfb414c2da4, type: 3}
   hitSparkPrefab: {fileID: 4531517889755008041, guid: a720f4082e3902f4fb4e20268825b910, type: 3}
 --- !u!1 &3391681901906759429
 GameObject:
@@ -147,12 +164,12 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 5238ed6ab79bb9e4eba0678075272650, type: 2}
   soundFXPrefab: {fileID: 8717602867167756619, guid: 15fde87fba0046d41a194706ec20ca21, type: 3}
   pitchVariance: 0.5
-  chargePitchRange: {x: 1, y: 2.5}
+  chargePitchRange: {x: 0, y: 0}
   wallCollision: {fileID: 8300000, guid: 3352a847bd97994409528a2a5e4a8da7, type: 3}
   playerDamaged: {fileID: 0}
   collectableCollected: {fileID: 0}
   objectKilled: {fileID: 0}
-  chargeLoop: {fileID: 8300000, guid: 5ccb12ae9f0ffb043ba330e336946046, type: 3}
+  chargeLoop: {fileID: 0}
   chargeReleased: {fileID: 0}
   buttonEnter: {fileID: 0}
   buttonDown: {fileID: 0}
@@ -199,9 +216,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5210732920811836270, guid: 5238ed6ab79bb9e4eba0678075272650, type: 2}
-  m_audioClip: {fileID: 8300000, guid: bb6927e2cbf656b4783120e87173e3ec, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0

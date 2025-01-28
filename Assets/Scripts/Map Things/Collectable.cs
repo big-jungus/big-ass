@@ -23,7 +23,8 @@ public class Collectable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerManager.playerManager.playerController.Pickup(this, collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
+            // PlayerManager.playerManager.playerController.Pickup(this, collision.ClosestPoint(PlayerManager.playerManager.playerObj.transform.position));
+            PlayerManager.playerManager.playerController.Pickup(this, collision.gameObject.transform.position);
         }
     }
 
