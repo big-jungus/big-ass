@@ -79,7 +79,7 @@ MonoBehaviour:
   chargeMultiplier: 200
   maxForceMagnitude: 1000
   maxChargeTier: 4
-  speedTierValues: 0a000000190000002300000032000000
+  speedTierValues: 0a000000190000001e00000028000000
   ChargeUpgrade: 0
   chargeUpgradeAmount: 0.5
   velocityUpgradeAmount: 0.5
@@ -348,4 +348,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - MainMenu
+  - Water 1
   - TestLoader
