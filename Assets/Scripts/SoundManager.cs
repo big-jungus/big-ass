@@ -134,6 +134,7 @@ public class SoundManager : MonoBehaviour
         currentTime = 0f;
         musicSource.clip = newClip;
         musicSource.volume = 0f;
+        musicSource.loop = true;
         musicSource.Play();
 
         while (currentTime < transitionDuration)
