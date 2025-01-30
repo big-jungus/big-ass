@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5238ed6ab79bb9e4eba0678075272650, type: 2}
   soundFXPrefab: {fileID: 8717602867167756619, guid: 15fde87fba0046d41a194706ec20ca21, type: 3}
+  musicSource: {fileID: 4480847368296647379}
   pitchVariance: 0.5
   chargePitchRange: {x: 1, y: 3}
   wallCollision: {fileID: 8300000, guid: c0bd0c8c4b0cc094a850ecd3ce5f37d4, type: 3}
@@ -180,6 +181,34 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ce54d40e9d111924ca985c88cc1fb42f, type: 3}
   - {fileID: 8300000, guid: 60f136e97b1933145b42a7f648cd58f4, type: 3}
   cannonShot: {fileID: 8300000, guid: 0dbc7bfdf20840445b3bb65fcbafebff, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: 350440db8d6379e4f9a45aad2478b8df, type: 3}
+  gameplayMusic: {fileID: 8300000, guid: 7b94e46df459edb4cac61a50b080272d, type: 3}
+  pauseMenuMusic: {fileID: 8300000, guid: 17deae4cc0bc6674cbb37536bcc2fda4, type: 3}
+  volumeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  transitionDuration: 0.2
 --- !u!1 &4614320991312938720
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,7 +50,12 @@ public class PlayerManager : MonoBehaviour
     public void LevelLoaded(Scene newScene, LoadSceneMode loadScene)
     {
         if (newScene.name == "MainMenu")
+        {
+            soundManager.TransitionMusic(SoundManager.MusicStates.MainMenu);
             return;
+        }
+        else
+            soundManager.TransitionMusic(SoundManager.MusicStates.Gameplay);
 
         Time.timeScale = 1f;
 
