@@ -16,7 +16,9 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] GameObject pickupSparkle;
     [SerializeField] private GameObject hitSparkPrefab;
 
-    private void Start()
+    private bool wasSetup;
+
+    public void Setup()
     {
         PlayerManager.playerManager.playerController.CollisionOccured += WallCollision;
         PlayerManager.playerManager.playerController.CollectableCollected += CollectableCollected;
@@ -24,6 +26,9 @@ public class EffectsManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (!wasSetup)
+            return;
+
         PlayerManager.playerManager.playerController.CollisionOccured -= WallCollision;
         PlayerManager.playerManager.playerController.CollectableCollected -= CollectableCollected;
     }

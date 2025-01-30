@@ -16,6 +16,11 @@ public class Cannon : MonoBehaviour
         charge.action.canceled += Fire;
     }
 
+    private void OnDestroy()
+    {
+        charge.action.canceled -= Fire;
+    }
+
     private void Fire(InputAction.CallbackContext context)
     {
         if (!isPlayerAttached)

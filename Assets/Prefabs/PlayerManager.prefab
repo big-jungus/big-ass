@@ -354,5 +354,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - MainMenu
-  - Water 1
-  - TestLoader
+  - Cannon

@@ -282,6 +282,12 @@ public class PlayerController : MonoBehaviour
 
     public void AttachedToCannon(Cannon cannon)
     {
+        if (lastBounceRoutine != null)
+            StopCoroutine(lastBounceRoutine);
+
+        canCharge = true;
+        rb.drag = 0f;
+
         isCannon = true;
 
         arrow.Show();

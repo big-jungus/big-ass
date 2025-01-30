@@ -33,7 +33,16 @@ public class SoundManager : MonoBehaviour
     private AudioSource chargeSoundSource;
     private AudioSource speedTierSoundSource;
 
+    private bool wasSetup;
+
     private void Start()
+    {
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(0.5f) * 20f);
+        audioMixer.SetFloat("SoundFXVolume", Mathf.Log10(0.5f) * 20f);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(0.5f) * 20f);
+    }
+
+    public void Setup()
     {
         PlayerManager.playerManager.playerController.CollisionOccured += WallCollision;
         PlayerManager.playerManager.playerCombat.DamageTaken += PlayerDamaged;
@@ -44,13 +53,14 @@ public class SoundManager : MonoBehaviour
         PlayerManager.playerManager.playerController.ChargeStarted += ChargeStarted;
         PlayerManager.playerManager.playerController.CannonShot += CannonShot;
 
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(0.5f) * 20f);
-        audioMixer.SetFloat("SoundFXVolume", Mathf.Log10(0.5f) * 20f);
-        audioMixer.SetFloat("MusicVolume", Mathf.Log10(0.5f) * 20f);
+        wasSetup = true;
     }
 
     private void OnDestroy()
     {
+        if (!wasSetup)
+            return;
+
         PlayerManager.playerManager.playerController.CollisionOccured -= WallCollision;
         PlayerManager.playerManager.playerCombat.DamageTaken -= PlayerDamaged;
         PlayerManager.playerManager.playerController.Charging -= Charging;

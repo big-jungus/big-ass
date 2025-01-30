@@ -63,6 +63,8 @@ public class PlayerManager : MonoBehaviour
         playerUI = ui.GetComponentInChildren<PlayerUI>();
 
         FindObjectOfType<CameraController>().Setup();
+        soundManager.Setup();
+        effectsManager.Setup();
     }
 
     public void CollectableCollected(Collectable c)
