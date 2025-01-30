@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7f6e89cd1f5a580458f9d75b310900e4
+guid: 483b22a6468b1264789ff93274e8eb96
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walls_0
+      name: door_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a9426ff71fc4ee4298b519454be0a8d
-      internalID: 1775969806
+      spriteID: 0f62a4d65fc63ee4e8d33791a4f6f578
+      internalID: 1539393033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walls_1
+      name: door_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 420c1c9b23faadd4693c27a1baeb24bb
-      internalID: 624547699
+      spriteID: ff61502c4470778418cd91b4f1280cff
+      internalID: 1445774941
       vertices: []
       indices: 
       edges: []
@@ -149,8 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      walls_0: 1775969806
-      walls_1: 624547699
+      door_0: 1539393033
+      door_1: 1445774941
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

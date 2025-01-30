@@ -31,9 +31,9 @@ public class BreakableWall : MonoBehaviour
 
     protected void DestroyWall()
     {
-        // Destroy(this.gameObject);
         c2d.enabled = false;
-        StartCoroutine(_DeathAnim());
+        StartCoroutine(_DeathFlash());
+        // StartCoroutine(_DeathAnim());
     }
     IEnumerator _DeathAnim(){
         StartCoroutine(_Flash());
@@ -54,6 +54,24 @@ public class BreakableWall : MonoBehaviour
             yield return new WaitForSeconds(interval);
             timeElapsed += interval;
         }
+    }
+    
+    IEnumerator _DeathFlash(){
+        float deathFadeDuration = .5f;
+        float timeElapsed = 0;
+        float flashTime = .05f;
+        int numFlashes = Mathf.CeilToInt(deathFadeDuration/flashTime);
+        for(int i = 0; i < numFlashes; i++){
+            sr.enabled = !sr.enabled;
+            float time = 0;
+            while(time < flashTime){
+                yield return null;
+                time += Time.deltaTime;
+                timeElapsed += Time.deltaTime;
+                sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1 - timeElapsed / deathFadeDuration);
+            }
+        }
+            Destroy(this.gameObject);
     }
     // IEnumerator _Jitter(){
     //     float angle = Mathf.Deg2Rad * Random.Range(0,360);
