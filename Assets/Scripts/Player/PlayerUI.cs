@@ -96,7 +96,7 @@ public class PlayerUI : MonoBehaviour
         chargeBar.value = currentCharge / PlayerManager.playerManager.playerStats.maxChargeDuration;
     }
 
-    public void SpeedTierChanged(int tier)
+    public void SpeedTierChanged(int tier, bool isIncreasing)
     {
         if (scaleChangeRoutine != null)
             StopCoroutine(scaleChangeRoutine);

@@ -164,16 +164,22 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 5238ed6ab79bb9e4eba0678075272650, type: 2}
   soundFXPrefab: {fileID: 8717602867167756619, guid: 15fde87fba0046d41a194706ec20ca21, type: 3}
   pitchVariance: 0.5
-  chargePitchRange: {x: 0, y: 0}
-  wallCollision: {fileID: 8300000, guid: 3352a847bd97994409528a2a5e4a8da7, type: 3}
-  playerDamaged: {fileID: 0}
-  collectableCollected: {fileID: 0}
-  objectKilled: {fileID: 0}
-  chargeLoop: {fileID: 0}
-  chargeReleased: {fileID: 0}
-  buttonEnter: {fileID: 0}
-  buttonDown: {fileID: 0}
+  chargePitchRange: {x: 1, y: 3}
+  wallCollision: {fileID: 8300000, guid: c0bd0c8c4b0cc094a850ecd3ce5f37d4, type: 3}
+  playerDamaged: {fileID: 8300000, guid: 294fa4f05333ca042aaace7868269c1f, type: 3}
+  collectableCollected: {fileID: 8300000, guid: 08a1311f6db00a8459227a4f27d6b228, type: 3}
+  objectKilled: {fileID: 8300000, guid: 0153a3565f1eb5e4e85de77d4aa49743, type: 3}
+  chargeLoop: {fileID: 8300000, guid: 4b8c310bbc3a9924faf6048dd2e77120, type: 3}
+  chargeReleased: {fileID: 8300000, guid: cefb3830fe5bd7f4ab06ec94085facdb, type: 3}
+  buttonEnter: {fileID: 8300000, guid: fc7596121a827b94586f48201ed4a052, type: 3}
+  buttonDown: {fileID: 8300000, guid: 0c010a8b97a5c19409aa55dea187b2a3, type: 3}
   buttonUp: {fileID: 0}
+  speedTierSounds:
+  - {fileID: 8300000, guid: 0ee62589491ffb74c9e5679b493f3298, type: 3}
+  - {fileID: 8300000, guid: 8075fd613b07b5f42b7aac9e56a2bcb9, type: 3}
+  - {fileID: 8300000, guid: ce54d40e9d111924ca985c88cc1fb42f, type: 3}
+  - {fileID: 8300000, guid: 60f136e97b1933145b42a7f648cd58f4, type: 3}
+  cannonShot: {fileID: 8300000, guid: 0dbc7bfdf20840445b3bb65fcbafebff, type: 3}
 --- !u!1 &4614320991312938720
 GameObject:
   m_ObjectHideFlags: 0

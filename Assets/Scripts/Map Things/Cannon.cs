@@ -18,6 +18,9 @@ public class Cannon : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext context)
     {
+        if (!isPlayerAttached)
+            return;
+
         PlayerManager.playerManager.playerController.CannonFire();
         isPlayerAttached = false;
         StartCoroutine(LockoutTimer());

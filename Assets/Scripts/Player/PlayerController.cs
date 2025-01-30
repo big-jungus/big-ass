@@ -35,9 +35,10 @@ public class PlayerController : MonoBehaviour
     public Action<float> Charging;
     public Action ChargeEnded;
     public Action<float> VelocityUpdated;
-    public Action<int> SpeedTierChanged;
+    public Action<int, bool> SpeedTierChanged;
     public Action<Vector2, Collision2D> CollisionOccured;
     public Action<Vector3, Collectable.CollectableTypes> CollectableCollected;
+    public Action CannonShot;
 
     void Start(){
         arrow = GetComponentInChildren<DirectionArrow>();
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
         if (potentialTier > currentSpeedTier)
         {
             currentSpeedTier = potentialTier;
-            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), true);
         }
     }
 
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
         // Charge Meter
         float ChargePercent = (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
         currentSpeedTier = PlayerManager.playerManager.playerStats.maxChargeTier * ChargePercent - 1;
-        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+        //SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), true);
 
         // Movement
         Vector2 mousePosition = mouseLocation.action.ReadValue<Vector2>();
@@ -159,7 +160,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ChargeResetTimer());
 
             PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
-            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
             ChargeEnded?.Invoke();
         }
         else
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour
             rb.drag = 0;
             canCharge = true;
             VelocityUpdated?.Invoke(rb.velocity.magnitude);
-            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
 
             currentChargeDuration = 0;
             PlayerManager.playerManager.playerUI.UpdateCharge(currentChargeDuration);
@@ -196,7 +197,7 @@ public class PlayerController : MonoBehaviour
         rb.drag = 0;
         canCharge = true;
         VelocityUpdated?.Invoke(rb.velocity.magnitude);
-        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
 
         if (lastBounceRoutine != null)
             StopCoroutine(lastBounceRoutine);
@@ -223,7 +224,7 @@ public class PlayerController : MonoBehaviour
         rb.drag = 0;
         canCharge = true;
         VelocityUpdated?.Invoke(rb.velocity.magnitude);
-        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
 
         arrow.Show();
     }
@@ -239,7 +240,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetSpeedValue(GetCurrentSpeedTier());
             rb.drag = 0f;
             VelocityUpdated?.Invoke(rb.velocity.magnitude);
-            SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+            SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
         }
 
         if (currentSpeedTier <= 0)
@@ -295,7 +296,7 @@ public class PlayerController : MonoBehaviour
 
         currentChargeDuration = PlayerManager.playerManager.playerStats.maxChargeDuration;
         currentSpeedTier = PlayerManager.playerManager.playerStats.maxChargeTier - 1;
-        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), true);
     }
 
     private IEnumerator CannonChargeEventCall()
@@ -312,6 +313,7 @@ public class PlayerController : MonoBehaviour
         if (cannonCharge != null)
             StopCoroutine(cannonCharge);
 
+        CannonShot?.Invoke();
         isCannon = false;
         arrow.shouldFlash = true;
 
@@ -325,6 +327,6 @@ public class PlayerController : MonoBehaviour
         VelocityUpdated?.Invoke(rb.velocity.magnitude);
 
         currentSpeedTier = PlayerManager.playerManager.playerStats.GetTierFromSpeed(rb.velocity.magnitude);
-        SpeedTierChanged?.Invoke(GetCurrentSpeedTier());
+        SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), true);
     }
 }
