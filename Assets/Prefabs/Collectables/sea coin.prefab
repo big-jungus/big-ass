@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 112990533441899063}
   - component: {fileID: 7767780174645564780}
   - component: {fileID: 6443455316517036432}
+  - component: {fileID: 4102210718410748468}
   m_Layer: 0
   m_Name: sea coin
   m_TagString: Untagged
@@ -73,14 +74,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 148560593
-  m_SortingLayer: 5
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 67614d9b4b5f5604298c0a1d12fa931e, type: 3}
+  m_Sprite: {fileID: 1385049848, guid: 67614d9b4b5f5604298c0a1d12fa931e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -137,3 +138,25 @@ MonoBehaviour:
   collectableType: 1
   moveAmount: 0.08
   moveFrequency: 8
+  randomTime: 1
+--- !u!95 &4102210718410748468
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7925734046788050832}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fdcb75925894d9c4aae627410ba63619, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

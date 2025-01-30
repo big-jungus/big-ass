@@ -115,6 +115,7 @@ MonoBehaviour:
   - {r: 1, g: 0.7520286, b: 0.34509802, a: 1}
   - {r: 1, g: 0.9606578, b: 0.39999998, a: 1}
   pickupSparkle: {fileID: 6293124503486404433, guid: 2cf60665880f386478db1cfb414c2da4, type: 3}
+  pickupSparkleBig: {fileID: 6574496021897782064, guid: 1f9cec0ac2e84884eaa9a05846f4f963, type: 3}
   hitSparkPrefab: {fileID: 4531517889755008041, guid: a720f4082e3902f4fb4e20268825b910, type: 3}
 --- !u!1 &3391681901906759429
 GameObject:

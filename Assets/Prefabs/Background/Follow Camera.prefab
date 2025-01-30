@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: -4
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 339848316f9b33d4db9b439d87fb9b84, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.78456664, a: 0.11372549}
+  m_Color: {r: 0, g: 0.0697194, b: 0.18039216, a: 0.77254903}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -208,9 +208,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1999332801
   m_SortingLayer: 2
-  m_SortingOrder: 9
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 339848316f9b33d4db9b439d87fb9b84, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -353,11 +353,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -369,15 +369,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.8490566
+      value: 0.3207547
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.7533234
+      value: 0.27824378
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.41251338
+      value: 0.14070842
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -447,7 +447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4640898741415896224, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4640898741415896224, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: m_SortingLayerID
@@ -507,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 0.8
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -519,15 +519,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.7169812
+      value: 0.103773594
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.46193597
+      value: 0.103773594
       objectReference: {fileID: 0}
     - target: {fileID: 8491325870804696948, guid: ff92cc6dd9a25bf49b108a1020fbb277, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.253649
+      value: 0.103773594
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
