@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc3404174dc6624798330f8fd300ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sr: {fileID: 1776934368365015710}
+  a: {fileID: 1773124650493066765}
   activeTime: 0
   wobble: 0
   fade: 0

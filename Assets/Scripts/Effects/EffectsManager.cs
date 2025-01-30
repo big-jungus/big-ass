@@ -31,10 +31,13 @@ public class EffectsManager : MonoBehaviour
     public void SpawnHitSpark(Vector3 position)
     {
         int index = Random.Range(0, hitCircleColors.Length);
-        Instantiate(hitCirclePrefab, position, Quaternion.identity).GetComponent<SpriteRenderer>().color = hitCircleColors[index];
-        Instantiate(hitShinePrefab, position, Quaternion.identity).GetComponent<SpriteRenderer>().color = hitShineColors[index];
-        // GameObject sparkObj = Instantiate(hitSparkPrefab);
-        // sparkObj.transform.position = position;
+        GameObject circle = Instantiate(hitCirclePrefab, position, Quaternion.identity);
+        circle.GetComponent<SpriteRenderer>().color = hitCircleColors[index];
+        circle.GetComponent<Effect>().Spawn(transform.root, Color.white);
+
+        GameObject shine = Instantiate(hitShinePrefab, position, Quaternion.identity);
+        shine.GetComponent<SpriteRenderer>().color = hitCircleColors[index];
+        shine.GetComponent<Effect>().Spawn(transform.root, Color.white);
     }
     public void SpawnSpikeSpark(Vector3 position)
     {
