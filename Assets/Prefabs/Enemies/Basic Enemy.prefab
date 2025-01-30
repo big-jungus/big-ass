@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1264072453
-  m_SortingLayer: 3
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4e1ce5e6b1b4dad4caeb50112f5cb320, type: 3}
   m_Color: {r: 0.95294124, g: 0.09019608, b: 0.2509804, a: 1}
@@ -169,10 +169,11 @@ MonoBehaviour:
   detectionCollider: {fileID: 3562260373358209749}
   rb: {fileID: 3247937272960192505}
   seeker: {fileID: 4531212526484978946}
-  speed: 2
+  speed: 3
   nextWaypointDistance: 0.5
   movement: 0
   pathNodes: []
+  isActive: 1
 --- !u!114 &4531212526484978946
 MonoBehaviour:
   m_ObjectHideFlags: 0
