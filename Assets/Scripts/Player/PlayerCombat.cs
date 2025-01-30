@@ -16,15 +16,17 @@ public class PlayerCombat : CombatBase
         if (isDead || !canTakeDamage)
             return;
 
-        PlayerManager.playerManager.playerStats.currentHealth -= amount;
+        //PlayerManager.playerManager.playerStats.currentHealth -= amount;
         StartCoroutine(InvulnerabilityCooldown());
         DamageTaken?.Invoke(amount);
 
+        /*
         if (PlayerManager.playerManager.playerStats.currentHealth <= 0)
         {
             PlayerDeath?.Invoke();
             isDead = true;
         }
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

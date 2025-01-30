@@ -46,8 +46,13 @@ public class CameraController : MonoBehaviour
         }
 
         t.position = new Vector3(playerTransform.position.x, playerTransform.position.y, -10) ;
-        foreach(GameObject o in stagnantObjects){
-            o.transform.position = new Vector3(t.position.x, t.position.y, o.transform.position.z);
+
+        if (stagnantObjects != null && stagnantObjects.Length > 0)
+        {
+            foreach (GameObject o in stagnantObjects)
+            {
+                o.transform.position = new Vector3(t.position.x, t.position.y, o.transform.position.z);
+            }
         }
     }
 

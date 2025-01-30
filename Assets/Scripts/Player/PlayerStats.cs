@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Combat Stats")]
-    public float currentHealth;
-    public float maxHealth;
+    //public float currentHealth;
+    //public float maxHealth;
     public float damage;
     public float minVelocityToAttack;
     public float invulnerabilityDuration;

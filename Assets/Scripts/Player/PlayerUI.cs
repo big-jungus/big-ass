@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    /*
     [Header("Health Hearts")]
     [SerializeField] private Transform healthHolder;
     [SerializeField] private GameObject healthHeartPrefab;
     [SerializeField] private float spaceAmount;
     private List<HealthHeart> healthHearts = new List<HealthHeart>();
+    */
 
     [Header("UI References")]
     [SerializeField] private Slider chargeBar;
@@ -37,21 +39,22 @@ public class PlayerUI : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
+        //PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
         PlayerManager.playerManager.playerController.SpeedTierChanged += SpeedTierChanged;
         PlayerManager.playerManager.playerController.CollectableCollected += CollectableAdded;
 
-        SetupHealth();
+        //SetupHealth();
         UpdateCharge(0);
     }
 
     private void OnDestroy()
     {
-        PlayerManager.playerManager.playerCombat.DamageTaken -= UpdateHealth;
+        //PlayerManager.playerManager.playerCombat.DamageTaken -= UpdateHealth;
         PlayerManager.playerManager.playerController.SpeedTierChanged -= SpeedTierChanged;
         PlayerManager.playerManager.playerController.CollectableCollected -= CollectableAdded;
     }
 
+    /*
     private void SetupHealth()
     {
         for (int i = 0; i < PlayerManager.playerManager.playerStats.maxHealth; i++)
@@ -90,6 +93,7 @@ public class PlayerUI : MonoBehaviour
             RemoveHealthHeart();
         }
     }
+    */
 
     public void UpdateCharge(float currentCharge)
     {
