@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public Action ChargeStarted;
     public Action<float> Charging;
     public Action ChargeEnded;
-    public Action<float> VelocityUpdated;
+    public Action<float, Vector2> VelocityUpdated;
     public Action<int, bool> SpeedTierChanged;
     public Action<Vector2, Collision2D> CollisionOccured;
     public Action<Vector3, Collectable.CollectableTypes> CollectableCollected;
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
         Vector2 launchVelocity = normalDir * PlayerManager.playerManager.playerStats.GetSpeedValue(GetCurrentSpeedTier());
 
         rb.velocity = launchVelocity;
-        VelocityUpdated?.Invoke(rb.velocity.magnitude);
+        VelocityUpdated?.Invoke(rb.velocity.magnitude, rb.velocity.normalized);
 
         chargeStartLocation = transform.position;
 
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.drag = 0;
             canCharge = true;
-            VelocityUpdated?.Invoke(rb.velocity.magnitude);
+            VelocityUpdated?.Invoke(rb.velocity.magnitude, rb.velocity.normalized);
             SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
 
             currentChargeDuration = 0;
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.drag = 0;
         canCharge = true;
-        VelocityUpdated?.Invoke(rb.velocity.magnitude);
+        VelocityUpdated?.Invoke(rb.velocity.magnitude, rb.velocity.normalized);
         SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
 
         if (lastBounceRoutine != null)
@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.drag = 0;
         canCharge = true;
-        VelocityUpdated?.Invoke(rb.velocity.magnitude);
+        VelocityUpdated?.Invoke(rb.velocity.magnitude, rb.velocity.normalized);
         SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
 
         arrow.Show();
@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
 
             rb.velocity = rb.velocity.normalized * PlayerManager.playerManager.playerStats.GetSpeedValue(GetCurrentSpeedTier());
             rb.drag = 0f;
-            VelocityUpdated?.Invoke(rb.velocity.magnitude);
+            VelocityUpdated?.Invoke(rb.velocity.magnitude, rb.velocity.normalized);
             SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), false);
         }
 
@@ -330,7 +330,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.AddForce(pushForce);
 
-        VelocityUpdated?.Invoke(rb.velocity.magnitude);
+        VelocityUpdated?.Invoke(rb.velocity.magnitude, rb.velocity.normalized);
 
         currentSpeedTier = PlayerManager.playerManager.playerStats.GetTierFromSpeed(rb.velocity.magnitude);
         SpeedTierChanged?.Invoke(GetCurrentSpeedTier(), true);
