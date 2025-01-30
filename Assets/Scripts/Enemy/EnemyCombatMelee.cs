@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyCombatMelee : CombatBase
 {
+    [SerializeField] bool canDie = true;
     [SerializeField] private int damage;
     [SerializeField] private float launchForce;
     [SerializeField] private float attackCooldown;
@@ -27,7 +28,8 @@ public class EnemyCombatMelee : CombatBase
 
     public override void TakeDamage(int amount)
     {
-        Destroy(this.gameObject);
+        if(canDie)
+            Destroy(this.gameObject);
     }
 
     public IEnumerator AttackCooldown()
