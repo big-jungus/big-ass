@@ -25,6 +25,19 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private List<float> scaleTiers = new List<float>();
     private Coroutine scaleChangeRoutine;
 
+    [SerializeField] private AnimationCurve emptyCurve;
+    [SerializeField] private float emptyDuration;
+    private Coroutine emptyRoutine;
+
+    [SerializeField] private Color[] flashColors;
+    [SerializeField] private float flashDelay;
+    private Coroutine flashRoutine;
+    private bool isMaxCharge = false;
+
+    [Header("Charge Bar")]
+    [SerializeField] private Image chargeFill;
+    [SerializeField] private Gradient chargeGradient;
+
     [Header("Coin Collected Animation")]
     [SerializeField] private AnimationCurve scaleCurve;
     [SerializeField] private float animationDuration;
@@ -42,6 +55,9 @@ public class PlayerUI : MonoBehaviour
         //PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
         PlayerManager.playerManager.playerController.SpeedTierChanged += SpeedTierChanged;
         PlayerManager.playerManager.playerController.CollectableCollected += CollectableAdded;
+        PlayerManager.playerManager.playerController.SpeedTierChanged += EmptyChargeBar;
+        PlayerManager.playerManager.playerController.Charging += CheckForMaxCharge;
+        PlayerManager.playerManager.playerController.ChargeEnded += Released;
 
         //SetupHealth();
         UpdateCharge(0);
@@ -52,6 +68,9 @@ public class PlayerUI : MonoBehaviour
         //PlayerManager.playerManager.playerCombat.DamageTaken -= UpdateHealth;
         PlayerManager.playerManager.playerController.SpeedTierChanged -= SpeedTierChanged;
         PlayerManager.playerManager.playerController.CollectableCollected -= CollectableAdded;
+        PlayerManager.playerManager.playerController.SpeedTierChanged -= EmptyChargeBar;
+        PlayerManager.playerManager.playerController.Charging -= CheckForMaxCharge;
+        PlayerManager.playerManager.playerController.ChargeEnded -= Released;
     }
 
     /*
@@ -98,6 +117,38 @@ public class PlayerUI : MonoBehaviour
     public void UpdateCharge(float currentCharge)
     {
         chargeBar.value = currentCharge / PlayerManager.playerManager.playerStats.maxChargeDuration;
+        
+        if (!isMaxCharge)
+            chargeFill.color = chargeGradient.Evaluate(currentCharge / PlayerManager.playerManager.playerStats.maxChargeDuration);
+    }
+
+    private void EmptyChargeBar(int newSpeedTier, bool isIncreasing)
+    {
+        if (emptyRoutine != null)
+            StopCoroutine(emptyRoutine);
+
+        if (!isIncreasing)
+        {
+            float percent = (float)newSpeedTier / (float)(PlayerManager.playerManager.playerStats.maxChargeTier);
+            emptyRoutine = StartCoroutine(EmptyAnimation(percent));
+        }
+    }
+
+    private IEnumerator EmptyAnimation(float newCharge)
+    {
+        float startingValue = chargeBar.value;
+        float currentValue;
+
+        float currentTime = 0f;
+        while (currentTime < emptyDuration)
+        {
+            yield return null;
+            currentTime += Time.deltaTime;
+
+            currentValue = Mathf.Lerp(startingValue, newCharge, emptyCurve.Evaluate(currentTime / emptyDuration));
+            chargeBar.value = currentValue;
+            chargeFill.color = chargeGradient.Evaluate(currentValue);
+        }
     }
 
     public void SpeedTierChanged(int tier, bool isIncreasing)
@@ -120,6 +171,51 @@ public class PlayerUI : MonoBehaviour
             currentTime += Time.deltaTime;
 
             chargeBar.transform.localScale = Vector3.Lerp(startingScale, newScale, scaleChangeCurve.Evaluate(currentTime / scaleDuration));
+        }
+    }
+
+    private void CheckForMaxCharge(float currentCharge)
+    {
+        if (currentCharge == PlayerManager.playerManager.playerStats.maxChargeDuration)
+        {
+            if (flashRoutine == null)
+                flashRoutine = StartCoroutine(FlashAnimation());
+
+            isMaxCharge = true;
+        }
+    }
+
+    private void Released()
+    {
+        if (flashRoutine != null)
+            StopCoroutine(flashRoutine);
+        flashRoutine = null;
+
+        isMaxCharge = false;
+        chargeFill.color = chargeGradient.Evaluate(1f);
+    }
+
+    private IEnumerator FlashAnimation()
+    {
+        float currentTime = 0f;
+        int spriteCounter = 0;
+
+        // yield return new WaitForSeconds(offset);
+
+        while (true)
+        {
+            currentTime = 0f;
+            while (currentTime < flashDelay)
+            {
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+
+            spriteCounter++;
+            if (spriteCounter >= flashColors.Length)
+                spriteCounter = 0;
+
+            chargeFill.color = flashColors[spriteCounter];
         }
     }
 

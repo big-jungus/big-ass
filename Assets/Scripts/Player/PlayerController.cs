@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         Charging?.Invoke(currentChargeDuration);
 
         float ChargePercent = (currentChargeDuration / PlayerManager.playerManager.playerStats.maxChargeDuration);
-        int potentialTier = Mathf.Clamp(Mathf.FloorToInt(PlayerManager.playerManager.playerStats.maxChargeTier * ChargePercent - 1), 0, PlayerManager.playerManager.playerStats.maxChargeTier);
+        int potentialTier = Mathf.Clamp(Mathf.FloorToInt(PlayerManager.playerManager.playerStats.maxChargeTier * ChargePercent), 0, PlayerManager.playerManager.playerStats.maxChargeTier - 1);
         if (potentialTier > currentSpeedTier)
         {
             currentSpeedTier = potentialTier;
