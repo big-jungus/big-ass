@@ -83,6 +83,8 @@ public class PlayerManager : MonoBehaviour
         GameObject ui = Instantiate(uiPrefab);
         playerUI = ui.GetComponentInChildren<PlayerUI>();
         ui.GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
+        ui.GetComponent<Canvas>().sortingLayerName = "UI";
+        ui.GetComponent<Canvas>().sortingOrder = 5;
     }
 
     public void CollectableCollected(Collectable c)
