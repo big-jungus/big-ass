@@ -31,6 +31,6 @@ public class LevelTransition : MonoBehaviour
 
     public void EndTransitionFinished()
     {
-        PlayerManager.playerManager.playerController.EnableCharge();
+        PlayerManager.playerManager.StartGameplay();
     }
 }

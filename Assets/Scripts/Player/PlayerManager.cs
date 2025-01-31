@@ -78,17 +78,24 @@ public class PlayerManager : MonoBehaviour
         FindObjectOfType<CameraController>().Setup();
         soundManager.Setup();
         effectsManager.Setup();
+        playerStats.currentLevelTimer = 0;
     }
 
     public void CollectableCollected(Collectable c)
     {
         if (c.collectableType == Collectable.CollectableTypes.Win)
         {
-            // Win
-            levelManager.NextLevel();
+            playerStats.timerStart = false;
+            playerUI.ShowScoreboard();
             return;
         }
 
         playerStats.CollectableAdded(c.collectableType, 1);
+    }
+
+    public void StartGameplay()
+    {
+        playerController.EnableCharge();
+        playerStats.timerStart = true;
     }
 }

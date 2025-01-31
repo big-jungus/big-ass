@@ -225,6 +225,8 @@ MonoBehaviour:
   StopUpgrade: 1
   bigCoinCount: 0
   smallCoinCount: 0
+  currentLevelTimer: 0
+  timerStart: 0
 --- !u!114 &5114032906500074419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +307,7 @@ MonoBehaviour:
   soundFXPrefab: {fileID: 8717602867167756619, guid: 15fde87fba0046d41a194706ec20ca21, type: 3}
   musicSource: {fileID: 4480847368296647379}
   pitchVariance: 0.5
+  scoreboardPitchStep: 0.2
   chargePitchRange: {x: 1, y: 3}
   wallCollision: {fileID: 8300000, guid: c0bd0c8c4b0cc094a850ecd3ce5f37d4, type: 3}
   playerDamaged: {fileID: 8300000, guid: 294fa4f05333ca042aaace7868269c1f, type: 3}

@@ -33,6 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        Time.timeScale = 1f;
         PlayerManager.playerManager.levelManager.LoadLevel(0);
     }
 
@@ -43,7 +44,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ReloadLevel()
     {
+        Time.timeScale = 1f;
         PlayerManager.playerManager.levelManager.ReloadLevel();
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1f;
+        PlayerManager.playerManager.levelManager.NextLevel();
     }
 
     public void MasterVolumeChanged(float volume)

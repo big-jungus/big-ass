@@ -32,6 +32,6 @@ public class LevelManager : MonoBehaviour
 
     public void ReloadLevel()
     {
-        SceneManager.LoadScene(levels[activeLevel]);
+        PlayerManager.playerManager.levelTransition.StartTransition(activeLevel);
     }
 }

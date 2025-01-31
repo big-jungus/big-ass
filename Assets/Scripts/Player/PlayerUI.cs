@@ -19,6 +19,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Slider chargeBar;
     [SerializeField] private TMP_Text bigCoinText;
     [SerializeField] private TMP_Text smallCoinText;
+    [SerializeField] private Scoreboard scoreboard;
 
     [Header("Charge Bar Animation")]
     [SerializeField] private AnimationCurve scaleChangeCurve;
@@ -51,6 +52,9 @@ public class PlayerUI : MonoBehaviour
 
     [HideInInspector] public bool isPaused;
 
+    [Header("Timer")]
+    [SerializeField] private TMP_Text timerText;
+
     private void Start()
     {
         //PlayerManager.playerManager.playerCombat.DamageTaken += UpdateHealth;
@@ -62,6 +66,7 @@ public class PlayerUI : MonoBehaviour
 
         //SetupHealth();
         UpdateCharge(0);
+        UpdateTimer(0);
     }
 
     private void OnDestroy()
@@ -72,6 +77,17 @@ public class PlayerUI : MonoBehaviour
         PlayerManager.playerManager.playerController.SpeedTierChanged -= EmptyChargeBar;
         PlayerManager.playerManager.playerController.Charging -= CheckForMaxCharge;
         PlayerManager.playerManager.playerController.ChargeEnded -= Released;
+    }
+
+    public void UpdateTimer(float time)
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        timerText.text = timeSpan.ToString(format:@"mm\:ss\:ff");
+    }
+
+    public void ShowScoreboard()
+    {
+        scoreboard.Show();
     }
 
     /*

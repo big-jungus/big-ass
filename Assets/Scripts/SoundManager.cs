@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("SFX Variables")]
     [SerializeField] private float pitchVariance;
+    [SerializeField] private float scoreboardPitchStep;
 
     [Header("Charging Variables")]
     [SerializeField] private Vector2 chargePitchRange;
@@ -168,6 +169,18 @@ public class SoundManager : MonoBehaviour
     }
 
     // SFX
+    public void ScoreboardSound(int count)
+    {
+        AudioSource audioSource = Instantiate(soundFXPrefab, PlayerManager.playerManager.playerObj.transform.position, Quaternion.identity);
+        audioSource.clip = objectKilled;
+        audioSource.volume = 1f;
+        audioSource.pitch = 1f + (count * scoreboardPitchStep);
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
     private void WallCollision(Vector2 dir, Collision2D collision)
     {
         PlaySoundFXVariance(wallCollision, collision.GetContact(0).point, 1f);
@@ -178,7 +191,7 @@ public class SoundManager : MonoBehaviour
         PlaySoundFXVariance(playerDamaged, PlayerManager.playerManager.playerObj.transform.position, 1f);
     }
 
-    private void CollectableCollected(Vector3 position, Collectable.CollectableTypes type)
+    public void CollectableCollected(Vector3 position, Collectable.CollectableTypes type)
     {
         PlaySoundFX(collectableCollected, position, 1f);
     }

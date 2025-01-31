@@ -28,6 +28,18 @@ public class PlayerStats : MonoBehaviour
     public int bigCoinCount;
     public int smallCoinCount;
 
+    public float currentLevelTimer = 0f;
+    public bool timerStart = false;
+
+    private void Update()
+    {
+        if (!timerStart)
+            return;
+
+        currentLevelTimer += Time.deltaTime;
+        PlayerManager.playerManager.playerUI.UpdateTimer(currentLevelTimer);
+    }
+
     public float GetSpeedValue(int tier)
     {
         return speedTierValues[tier];

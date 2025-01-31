@@ -491,7 +491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7142230465445444075, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
       propertyPath: levels.Array.size
-      value: 2
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7142230465445444075, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: levels.Array.data[1]
+      value: Cannon
       objectReference: {fileID: 0}
     - target: {fileID: 7142230465445444075, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
       propertyPath: levels.Array.data[2]
