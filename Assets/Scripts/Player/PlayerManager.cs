@@ -72,13 +72,17 @@ public class PlayerManager : MonoBehaviour
         playerController = playerObj.GetComponent<PlayerController>();
         playerCombat = playerObj.GetComponentInChildren<PlayerCombat>();
 
-        GameObject ui = Instantiate(uiPrefab);
-        playerUI = ui.GetComponentInChildren<PlayerUI>();
+        SetupUI();
 
         FindObjectOfType<CameraController>().Setup();
         soundManager.Setup();
         effectsManager.Setup();
         playerStats.currentLevelTimer = 0;
+    }
+    void SetupUI(){
+        GameObject ui = Instantiate(uiPrefab);
+        playerUI = ui.GetComponentInChildren<PlayerUI>();
+        ui.GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
     }
 
     public void CollectableCollected(Collectable c)

@@ -16,7 +16,7 @@ public class ParticleScaler : MonoBehaviour
         int xTiles = ps.textureSheetAnimation.numTilesX;
         // print("x tiles " + ps.textureSheetAnimation.numTilesX);
         main.startSize = new ParticleSystem.MinMaxCurve((float)pr.material.mainTexture.width/xTiles/PPU);
-        print((float)pr.material.mainTexture.width/xTiles/PPU);
+        // print((float)pr.material.mainTexture.width/xTiles/PPU);
         
     }
 }

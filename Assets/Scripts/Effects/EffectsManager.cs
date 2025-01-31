@@ -39,11 +39,11 @@ public class EffectsManager : MonoBehaviour
         int index = Random.Range(0, hitCircleColors.Length);
         GameObject circle = Instantiate(hitCirclePrefab, position, Quaternion.identity);
         // circle.GetComponent<SpriteRenderer>().color = hitCircleColors[index];
-        circle.GetComponent<Effect>().Spawn(transform.root, hitCircleColors[index]);
+        circle.GetComponent<Effect>().Spawn(transform, hitCircleColors[index]);
 
         GameObject shine = Instantiate(hitShinePrefab, position, Quaternion.identity);
         // shine.GetComponent<SpriteRenderer>().color = hitShineColors[index];
-        shine.GetComponent<Effect>().Spawn(transform.root, hitShineColors[index]);
+        shine.GetComponent<Effect>().Spawn(transform, hitShineColors[index]);
     }
     public void SpawnSpikeSpark(Vector3 position)
     {
@@ -81,7 +81,7 @@ public class EffectsManager : MonoBehaviour
         int index;
         float radius = .3f;
         index = Random.Range(0, pickupColors.Length);
-        Instantiate(pickupSparkle, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform.root, pickupColors[index]);
+        Instantiate(pickupSparkle, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform, pickupColors[index]);
         yield return null;
         yield return null;
         yield return null;
@@ -91,7 +91,7 @@ public class EffectsManager : MonoBehaviour
             angle = Mathf.Deg2Rad * Random.Range(0,360);
             pos = (Vector2)origin + new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
             index = Random.Range(0, pickupColors.Length);
-            Instantiate(pickupSparkle, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform.root, pickupColors[index]);
+            Instantiate(pickupSparkle, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform, pickupColors[index]);
             yield return null;
             yield return null;
             yield return null;
@@ -104,7 +104,7 @@ public class EffectsManager : MonoBehaviour
         int index;
         float radius = .4f;
         index = Random.Range(0, pickupColors.Length);
-        Instantiate(pickupSparkleBig, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform.root, pickupColors[index]);
+        Instantiate(pickupSparkleBig, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform, pickupColors[index]);
         yield return null;
         yield return null;
         for (int i = 0; i < numSparkles; i++)
@@ -112,7 +112,7 @@ public class EffectsManager : MonoBehaviour
             angle = Mathf.Deg2Rad * Random.Range(0,360);
             pos = (Vector2)origin + new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
             index = Random.Range(0, pickupColors.Length);
-            Instantiate(pickupSparkleBig, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform.root, pickupColors[index]);
+            Instantiate(pickupSparkleBig, pos, Quaternion.identity).GetComponent<Effect>().Spawn(transform, pickupColors[index]);
             yield return null;
             yield return null;
         }
