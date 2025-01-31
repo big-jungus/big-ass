@@ -20,7 +20,7 @@ public class CollisionShake : MonoBehaviour
     private void Start()
     {
         PlayerManager.playerManager.playerController.CollisionOccured += WallCollision;
-        homePosition = transform.position;
+        homePosition = transform.localPosition;
     }
 
     private void OnDestroy()
@@ -39,7 +39,7 @@ public class CollisionShake : MonoBehaviour
     private IEnumerator ShakeAnimation(Vector2 dir)
     {
         float currentTime = 0f;
-        Vector3 startingPos = transform.position;
+        Vector3 startingPos = transform.localPosition;
         Vector3 endPos = startingPos - (Vector3)(dir * shakeIntensities[PlayerManager.playerManager.playerController.GetCurrentSpeedTier()]);
 
         while (currentTime < moveDuration)
@@ -47,29 +47,29 @@ public class CollisionShake : MonoBehaviour
             yield return null;
             currentTime += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(startingPos, endPos, shakeMoveCurve.Evaluate(currentTime / moveDuration));
+            transform.localPosition = Vector3.Lerp(startingPos, endPos, shakeMoveCurve.Evaluate(currentTime / moveDuration));
         }
 
         currentTime = 0f;
         Vector3 counterShakePos = startingPos + (Vector3)(dir * shakeIntensities[PlayerManager.playerManager.playerController.GetCurrentSpeedTier()]);
-        startingPos = transform.position;
+        startingPos = transform.localPosition;
         while (currentTime < moveDuration * 2)
         {
             yield return null;
             currentTime += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(startingPos, counterShakePos, shakeMoveCurve.Evaluate(currentTime / (moveDuration * 2)));
+            transform.localPosition = Vector3.Lerp(startingPos, counterShakePos, shakeMoveCurve.Evaluate(currentTime / (moveDuration * 2)));
         }
 
         // Return
-        startingPos = transform.position;
+        startingPos = transform.localPosition;
         currentTime = 0f;
         while (currentTime < returnDuration)
         {
             yield return null;
             currentTime += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(startingPos, homePosition, returnMoveCurve.Evaluate(currentTime / returnDuration));
+            transform.localPosition = Vector3.Lerp(startingPos, homePosition, returnMoveCurve.Evaluate(currentTime / returnDuration));
         }
     }
 }
