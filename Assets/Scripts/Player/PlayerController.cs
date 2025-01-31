@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public DirectionArrow arrow;
 
     private float currentChargeDuration;
-    private bool canCharge = true;
+    private bool canCharge = false;
     private bool isCharging = false;
     private bool isCannon = false;
 
@@ -56,6 +56,11 @@ public class PlayerController : MonoBehaviour
         charge.action.started -= Charge;
         charge.action.canceled -= Release;
         stop.action.performed -= Stop;
+    }
+
+    public void EnableCharge()
+    {
+        canCharge = true;
     }
 
     private void Update()

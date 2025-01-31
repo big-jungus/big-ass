@@ -12,6 +12,11 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
+        PlayerManager.playerManager.levelTransition.StartTransition(level);
+    }
+
+    public void AnimationComplete(int level)
+    {
         SceneManager.LoadScene(levels[level]);
         activeLevel = level;
     }

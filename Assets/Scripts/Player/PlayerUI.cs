@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -192,7 +193,7 @@ public class PlayerUI : MonoBehaviour
         flashRoutine = null;
 
         isMaxCharge = false;
-        chargeFill.color = chargeGradient.Evaluate(1f);
+        chargeFill.color = chargeGradient.Evaluate((float)PlayerManager.playerManager.playerController.GetCurrentSpeedTier() / (float)(PlayerManager.playerManager.playerStats.maxChargeTier));
     }
 
     private IEnumerator FlashAnimation()

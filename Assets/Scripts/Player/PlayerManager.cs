@@ -14,12 +14,15 @@ public class PlayerManager : MonoBehaviour
     public LevelManager levelManager;
     public EffectsManager effectsManager;
     public SoundManager soundManager;
+    public LevelTransition levelTransition;
 
     [Header("Required Prefabs")]
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject uiPrefab;
 
     public static PlayerManager playerManager;
+
+    private bool isFirstLoad = true;
 
     private void Awake()
     {
@@ -49,6 +52,11 @@ public class PlayerManager : MonoBehaviour
 
     public void LevelLoaded(Scene newScene, LoadSceneMode loadScene)
     {
+        if (isFirstLoad)
+            isFirstLoad = false;
+        else
+            levelTransition.EndTransition();
+
         if (newScene.name == "MainMenu")
         {
             soundManager.TransitionMusic(SoundManager.MusicStates.MainMenu);
