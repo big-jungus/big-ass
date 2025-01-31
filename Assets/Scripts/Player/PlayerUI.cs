@@ -36,6 +36,8 @@ public class PlayerUI : MonoBehaviour
     private Coroutine flashRoutine;
     private bool isMaxCharge = false;
 
+    [SerializeField] private Image chargeBarFrame;
+
     [Header("Charge Bar")]
     [SerializeField] private Image chargeFill;
     [SerializeField] private Gradient chargeGradient;
@@ -209,7 +211,7 @@ public class PlayerUI : MonoBehaviour
         flashRoutine = null;
 
         isMaxCharge = false;
-        chargeFill.color = chargeGradient.Evaluate((float)PlayerManager.playerManager.playerController.GetCurrentSpeedTier() / (float)(PlayerManager.playerManager.playerStats.maxChargeTier));
+        chargeBarFrame.color = flashColors[0];
     }
 
     private IEnumerator FlashAnimation()
@@ -232,7 +234,7 @@ public class PlayerUI : MonoBehaviour
             if (spriteCounter >= flashColors.Length)
                 spriteCounter = 0;
 
-            chargeFill.color = flashColors[spriteCounter];
+            chargeBarFrame.color = flashColors[spriteCounter];
         }
     }
 

@@ -1537,6 +1537,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   flashDelay: 0.1
+  chargeBarFrame: {fileID: 2679510179012532951}
   chargeFill: {fileID: 2723432493489203276}
   chargeGradient:
     serializedVersion: 2
