@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
     {
         int newLevel = activeLevel + 1;
         if (newLevel >= levels.Count)
-            newLevel = 1;
+            newLevel = 0;
 
         PlayerManager.playerManager.levelTransition.StartTransition(newLevel);
     }

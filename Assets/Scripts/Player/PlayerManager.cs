@@ -57,7 +57,7 @@ public class PlayerManager : MonoBehaviour
         else
             levelTransition.EndTransition();
 
-        if (newScene.name == "MainMenu")
+        if (newScene.name == "MainMenu" || newScene.name == "WinScreen")
         {
             soundManager.TransitionMusic(SoundManager.MusicStates.MainMenu);
             return;
@@ -95,6 +95,9 @@ public class PlayerManager : MonoBehaviour
 
     public void StartGameplay()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "WinScreen")
+            return;
+
         playerController.EnableCharge();
         playerStats.timerStart = true;
     }
