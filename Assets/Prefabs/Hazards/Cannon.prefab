@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61c4206f7c206f42b42b80dd70a57e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseLocation: {fileID: -3804944345717766886, guid: 221ee0210a4f82c4fa25a47555399522, type: 3}
   charge: {fileID: 919011256287513915, guid: 221ee0210a4f82c4fa25a47555399522, type: 3}
   lockoutDuration: 0.2
 --- !u!58 &6385811302814371197
