@@ -637,7 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - MainMenu
-  - Cannon
   - Bounce
+  - Cannon
   - Fish
   - WinScreen
