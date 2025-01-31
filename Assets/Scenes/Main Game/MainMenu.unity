@@ -489,6 +489,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1080
       objectReference: {fileID: 0}
+    - target: {fileID: 7142230465445444075, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: levels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7142230465445444075, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
+      propertyPath: levels.Array.data[2]
+      value: Bounce
+      objectReference: {fileID: 0}
     - target: {fileID: 7856814120058773678, guid: ca5a56c9fd5f39848ab66ffad3c86a0b, type: 3}
       propertyPath: m_IsActive
       value: 1

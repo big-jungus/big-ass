@@ -15,6 +15,15 @@ public class LevelManager : MonoBehaviour
         PlayerManager.playerManager.levelTransition.StartTransition(level);
     }
 
+    public void NextLevel()
+    {
+        int newLevel = activeLevel + 1;
+        if (newLevel >= levels.Count)
+            newLevel = 1;
+
+        PlayerManager.playerManager.levelTransition.StartTransition(newLevel);
+    }
+
     public void AnimationComplete(int level)
     {
         SceneManager.LoadScene(levels[level]);

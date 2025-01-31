@@ -5,23 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Main Game/MainMenu.unity
     guid: b16d2862df153a04bb2729861d25064b
   - enabled: 1
-    path: Assets/Scenes/Main Game/TestLoader.unity
-    guid: e38e956e2ef00dc4cb6992c3b948144c
-  - enabled: 1
     path: Assets/Scenes/Main Game/Cannon.unity
     guid: 05f1fc20d1062e64aa782d3245a98f19
-  - enabled: 0
-    path: Assets/Scenes/TestLevel.unity
-    guid: 500602180bf4b234e8b16b1ca3f923a9
-  - enabled: 0
-    path: Assets/Scenes/Main Game/Water 1.unity
-    guid: 8357899d4af6d1d4da6db846c91516c3
+  - enabled: 1
+    path: Assets/Scenes/Main Game/Bounce.unity
+    guid: 0c7adcfe48bdf43419c495e16432ffb1
+  - enabled: 1
+    path: Assets/Scenes/Main Game/Fish.unity
+    guid: 98f123e44080e274fa54653b3e427851
+  - enabled: 1
+    path: Assets/Scenes/Main Game/Spikes.unity
+    guid: 4e126b3ae9ee6614ba0f4f8d14de23f2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 02ecc18ab0ada0b4a9c73299eb92e961, type: 2}

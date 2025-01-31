@@ -85,7 +85,7 @@ public class PlayerManager : MonoBehaviour
         if (c.collectableType == Collectable.CollectableTypes.Win)
         {
             // Win
-            levelManager.LoadLevel(0);
+            levelManager.NextLevel();
             return;
         }
 
